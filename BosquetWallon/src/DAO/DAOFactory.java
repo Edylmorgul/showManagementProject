@@ -10,14 +10,29 @@ public class DAOFactory {
 	
 	// Construction des instances d'objets d'accès aux données
 	// Personne
+	public DAO<Personne> getPersonneDAO(){
+		return new DAOPersonne(conn);
+	}
 	
 	// Client
+	public DAO<Client> getClientDAO(){
+		return new DAOClient(conn);
+	}
 	
 	// Organisateur
+	public DAO<Organisateur> getOrganisateurDAO(){
+		return new DAOOrganisateur(conn);
+	}
 	
 	// Gestionnaire
+	public DAO<Gestionnaire> getGestionnaireDAO(){
+		return new DAOGestionnaire(conn);
+	}
 	
 	// Artiste
+	public DAO<Artiste> getArtisteDAO(){
+		return new DAOArtiste(conn);
+	}
 	
 	// Catégorie 
 	
