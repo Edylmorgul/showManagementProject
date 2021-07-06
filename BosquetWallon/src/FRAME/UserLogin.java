@@ -96,13 +96,22 @@ public class UserLogin extends JFrame {
 					if(pers != null) {
 						pers = (Personne) pers.checkTypeUser(pers);
 						if(pers instanceof Client) {
-							JOptionPane.showMessageDialog(null, "Client connecté!");
+							ClientAction frame = new ClientAction((Client) pers);				
+						    frame.setLocationRelativeTo(null);
+						    frame.setVisible(true);  
+						    dispose();
 						}					
 						else if(pers instanceof Organisateur) {
-							JOptionPane.showMessageDialog(null, "Organisateur connecté!");
+							OrganizerAction frame = new OrganizerAction((Organisateur) pers);				
+						    frame.setLocationRelativeTo(null);
+						    frame.setVisible(true);  
+						    dispose();
 						}
 						else {
-							JOptionPane.showMessageDialog(null, "Gestionnaire connecté!");
+							ManagerAction frame = new ManagerAction((Gestionnaire) pers);				
+						    frame.setLocationRelativeTo(null);
+						    frame.setVisible(true);  
+						    dispose();
 						}
 					}					
 					else
