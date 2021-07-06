@@ -92,7 +92,10 @@ public class OrganizerAction extends JFrame {
         op1.setFont(new Font("Segoe UI", Font.BOLD, 12));
         op1.addActionListener(new ActionListener(){
         	  public void actionPerformed(ActionEvent evt){
-        		
+        		UserEditAccount frame = new UserEditAccount(param); 
+          		frame.setLocationRelativeTo(null);
+       			frame.setVisible(true);  
+       			dispose();
   			}
         });
         

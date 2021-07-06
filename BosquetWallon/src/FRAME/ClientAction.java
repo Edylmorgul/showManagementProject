@@ -90,7 +90,10 @@ public class ClientAction extends JFrame {
         op1.setFont(new Font("Segoe UI", Font.BOLD, 12));
         op1.addActionListener(new ActionListener(){ // JMenuItem ==> Utilisation d'un ActionListener !!!
         	  public void actionPerformed(ActionEvent evt){
-        		   
+        		UserEditAccount frame = new UserEditAccount(param); 
+          		frame.setLocationRelativeTo(null);
+       			frame.setVisible(true);  
+       			dispose();      
   			}
         });
         

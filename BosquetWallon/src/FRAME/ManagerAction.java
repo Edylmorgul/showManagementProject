@@ -117,7 +117,10 @@ public class ManagerAction extends JFrame {
 		JButton btnUser = new JButton("Utilisateurs");
 		btnUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				ManagerDisplayUser frame = new ManagerDisplayUser(param);
+				frame.setLocationRelativeTo(null);
+				frame.setVisible(true);  
+				dispose();
 			}
 		});
 		btnUser.setBounds(230, 170, 120, 40);
