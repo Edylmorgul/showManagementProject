@@ -73,23 +73,23 @@ public class Show implements Serializable {
 	// Methodes
 	public boolean create() {
 		this.title = this.title.toLowerCase();
-		return Global.getFactory().getSpectacleDAO().create(this);
+		return Global.getFactory().getShowDAO().create(this);
 	}
 	
 	public boolean delete() {
-    	return Global.getFactory().getSpectacleDAO().delete(this);
+    	return Global.getFactory().getShowDAO().delete(this);
 	}
 	
 	public boolean update() {
-		return Global.getFactory().getSpectacleDAO().update(this);
+		return Global.getFactory().getShowDAO().update(this);
 	}
 	
 	public Show find() {
-		return Global.getFactory().getSpectacleDAO().find(this.id);
+		return Global.getFactory().getShowDAO().find(this.id);
 	}
 	
 	public static List<Show> getAll(){
-		return Global.getFactory().getSpectacleDAO().getAll();
+		return Global.getFactory().getShowDAO().getAll();
 	}	
 		
 	@Override

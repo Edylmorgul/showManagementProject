@@ -41,14 +41,14 @@ public class DAOSpectator extends DAO<Spectator>{
     @Override
     public boolean delete(Spectator obj){
     	
-    	return Global.getFactory().getPersonneDAO().delete(obj);
+    	return Global.getFactory().getPersonDAO().delete(obj);
     }
 
     @Override
     public boolean update(Spectator obj){
 		
     	// Modifier personne
-    	if(Global.getFactory().getPersonneDAO().update(obj)) {
+    	if(Global.getFactory().getPersonDAO().update(obj)) {
     		// Modifier spectateur
     		try {
                 PreparedStatement state = connect.prepareStatement("UPDATE T_client SET telephone =?, sexe =? WHERE idClient = " + obj.getId());

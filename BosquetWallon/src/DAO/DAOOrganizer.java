@@ -40,14 +40,14 @@ public class DAOOrganizer extends DAO<Organizer>{
 	@Override
 	public boolean delete(Organizer obj) {
 		
-    	return Global.getFactory().getPersonneDAO().delete(obj);
+    	return Global.getFactory().getPersonDAO().delete(obj);
 	}
 
 	@Override
 	public boolean update(Organizer obj) {
 				 	    			
 		// Modifier personne
-    	if(Global.getFactory().getPersonneDAO().update(obj)) {
+    	if(Global.getFactory().getPersonDAO().update(obj)) {
     		// Modifier organisateur
     		try {
                 PreparedStatement state = connect.prepareStatement("UPDATE T_organisateur SET telephone =?, sexe =? WHERE idOrganisateur = " + obj.getId());

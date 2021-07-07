@@ -104,27 +104,27 @@ public class Booking implements Serializable {
 	
 	// Methodes
 	public boolean create() {     
-        return Global.getFactory().getReservationDAO().create(this);
+        return Global.getFactory().getBookingDAO().create(this);
     }
 	
 	public boolean delete() {
-		return Global.getFactory().getReservationDAO().delete(this);
+		return Global.getFactory().getBookingDAO().delete(this);
 	}
 	
 	public boolean update() {
-		return Global.getFactory().getReservationDAO().update(this);
+		return Global.getFactory().getBookingDAO().update(this);
 	}
 	
 	public Booking find() {
-		return Global.getFactory().getReservationDAO().find(this.id);
+		return Global.getFactory().getBookingDAO().find(this.id);
 	}
 	
 	public Booking find(long id) {
-		return Global.getFactory().getReservationDAO().find(id);
+		return Global.getFactory().getBookingDAO().find(id);
 	}
 	
 	public static List<Booking> getAll(){
-		return Global.getFactory().getReservationDAO().getAll();
+		return Global.getFactory().getBookingDAO().getAll();
 	}
 	
 	@Override

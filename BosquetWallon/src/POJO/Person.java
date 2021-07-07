@@ -91,28 +91,28 @@ public class Person implements Serializable {
     // Methodes  
     public boolean create() {
 		this.email = this.email.toLowerCase();
-		return Global.getFactory().getPersonneDAO().create(this);
+		return Global.getFactory().getPersonDAO().create(this);
     }
     
     public boolean delete() {
-    	return Global.getFactory().getPersonneDAO().delete(this);
+    	return Global.getFactory().getPersonDAO().delete(this);
 	}
     
     public boolean update() {
-    	return Global.getFactory().getPersonneDAO().update(this);
+    	return Global.getFactory().getPersonDAO().update(this);
     }
     
     public Person find() {
-    	return Global.getFactory().getPersonneDAO().find(this.id);
+    	return Global.getFactory().getPersonDAO().find(this.id);
     }
     
     public Person find(long id) {
-    	return Global.getFactory().getPersonneDAO().find(id);
+    	return Global.getFactory().getPersonDAO().find(id);
     }
     
     // Liste en static pour éviter de créer un objet pour rien juste pour récup des objets en DB
     public static List<? extends Person> getAll(){ //Solution pour éviter problème de compatibilité entre liste pour héritage    	
-    	return Global.getFactory().getPersonneDAO().getAll();
+    	return Global.getFactory().getPersonDAO().getAll();
     }
     
     @Override

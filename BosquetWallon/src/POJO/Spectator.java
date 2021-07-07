@@ -57,7 +57,7 @@ public class Spectator extends Person {
 	@Override
 	public boolean create() {
 		super.create();
-		return Global.getFactory().getClientDAO().create(this);
+		return Global.getFactory().getSpectatorDAO().create(this);
 	}
 
 	@Override
@@ -68,23 +68,23 @@ public class Spectator extends Person {
 	@Override
 	public boolean update() {
 		if(super.update())
-			return Global.getFactory().getClientDAO().update(this);
+			return Global.getFactory().getSpectatorDAO().update(this);
 		
 		return false;
 	}
 	
 	@Override
 	public Spectator find() {
-		return Global.getFactory().getClientDAO().find(this.id);	
+		return Global.getFactory().getSpectatorDAO().find(this.id);	
 	}
 	
 	@Override
 	public Spectator find(long id) {
-		return Global.getFactory().getClientDAO().find(id);	
+		return Global.getFactory().getSpectatorDAO().find(id);	
 	}
 
 	public static List<Spectator> getAll() {
-		return Global.getFactory().getClientDAO().getAll();
+		return Global.getFactory().getSpectatorDAO().getAll();
 	}
 }
 

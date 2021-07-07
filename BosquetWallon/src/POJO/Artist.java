@@ -54,7 +54,7 @@ public class Artist extends Person {
 	public boolean create() {
 		super.create();
 		this.pseudo = this.pseudo.toLowerCase();
-		return Global.getFactory().getArtisteDAO().create(this);
+		return Global.getFactory().getArtistDAO().create(this);
 	}
 
 	@Override
@@ -69,15 +69,15 @@ public class Artist extends Person {
 
 	@Override
 	public Artist find() {	
-		return Global.getFactory().getArtisteDAO().find(this.id);
+		return Global.getFactory().getArtistDAO().find(this.id);
 	}
 	
 	@Override
 	public Artist find(long id) {	
-		return Global.getFactory().getArtisteDAO().find(id);
+		return Global.getFactory().getArtistDAO().find(id);
 	}
 
 	public static List<Artist> getAll() {		
-		return Global.getFactory().getArtisteDAO().getAll();
+		return Global.getFactory().getArtistDAO().getAll();
 	}
 }

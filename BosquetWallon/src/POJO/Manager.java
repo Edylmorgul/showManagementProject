@@ -37,7 +37,7 @@ public class Manager extends Person {
 	@Override
 	public boolean create() {
 		super.create();
-		return Global.getFactory().getGestionnaireDAO().create(this);
+		return Global.getFactory().getManagerDAO().create(this);
 	}
 	
 	@Override
@@ -52,15 +52,15 @@ public class Manager extends Person {
 
 	@Override
 	public Manager find() {
-		return Global.getFactory().getGestionnaireDAO().find(this.id);
+		return Global.getFactory().getManagerDAO().find(this.id);
 	}
 	
 	@Override
 	public Manager find(long id) {
-		return Global.getFactory().getGestionnaireDAO().find(id);
+		return Global.getFactory().getManagerDAO().find(id);
 	}
 	
 	public static List<Manager> getAll() {
-		return Global.getFactory().getGestionnaireDAO().getAll();
+		return Global.getFactory().getManagerDAO().getAll();
 	}
 }

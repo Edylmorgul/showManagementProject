@@ -10,27 +10,27 @@ public class DAOFactory {
 	
 	// Construction des instances d'objets d'accès aux données
 	// Personne
-	public DAO<Person> getPersonneDAO(){
+	public DAO<Person> getPersonDAO(){
 		return new DAOPerson(conn);
 	}
 	
 	// Client
-	public DAO<Spectator> getClientDAO(){
+	public DAO<Spectator> getSpectatorDAO(){
 		return new DAOSpectator(conn);
 	}
 	
 	// Organisateur
-	public DAO<Organizer> getOrganisateurDAO(){
+	public DAO<Organizer> getOrganizerDAO(){
 		return new DAOOrganizer(conn);
 	}
 	
 	// Gestionnaire
-	public DAO<Manager> getGestionnaireDAO(){
+	public DAO<Manager> getManagerDAO(){
 		return new DAOManager(conn);
 	}
 	
 	// Artiste
-	public DAO<Artist> getArtisteDAO(){
+	public DAO<Artist> getArtistDAO(){
 		return new DAOArtist(conn);
 	}
 	
@@ -39,12 +39,12 @@ public class DAOFactory {
 	// Commande
 	
 	// Spectacle
-	public DAO<Show> getSpectacleDAO(){
+	public DAO<Show> getShowDAO(){
 		return new DAOShow(conn);
 	}
 	
 	// Réservation
-	public DAO<Booking> getReservationDAO(){
+	public DAO<Booking> getBookingDAO(){
 		return new DAOBooking(conn);
 	}
 	

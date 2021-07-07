@@ -16,7 +16,6 @@ import javax.swing.border.EmptyBorder;
 
 import POJO.Organizer;
 import POJO.Planning;
-import POJO.Booking;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;

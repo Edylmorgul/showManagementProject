@@ -57,7 +57,7 @@ public class Organizer extends Person {
 	@Override
 	public boolean create() {
 		super.create();
-		return Global.getFactory().getOrganisateurDAO().create(this);
+		return Global.getFactory().getOrganizerDAO().create(this);
 	}
 
 	@Override
@@ -68,22 +68,22 @@ public class Organizer extends Person {
 	@Override
 	public boolean update() {
 		if(super.update())
-			return Global.getFactory().getOrganisateurDAO().update(this);
+			return Global.getFactory().getOrganizerDAO().update(this);
 		
 		return false;
 	}
 
 	@Override
 	public Organizer find() {
-		return Global.getFactory().getOrganisateurDAO().find(this.id);
+		return Global.getFactory().getOrganizerDAO().find(this.id);
 	}
 	
 	@Override
 	public Organizer find(long id) {
-		return Global.getFactory().getOrganisateurDAO().find(id);
+		return Global.getFactory().getOrganizerDAO().find(id);
 	}
 	
 	public static List<Organizer> getAll() {		
-		return Global.getFactory().getOrganisateurDAO().getAll();
+		return Global.getFactory().getOrganizerDAO().getAll();
 	}
 }
