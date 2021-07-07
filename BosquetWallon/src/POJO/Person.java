@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Personne implements Serializable {
+public class Person implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
     
@@ -17,11 +17,11 @@ public class Personne implements Serializable {
     protected String password = "";
     
     // Constructeurs
-    public Personne() {
+    public Person() {
     	
     }
     
-    public Personne(long id, String nom, String prenom, String telephone, String email, String password) {
+    public Person(long id, String nom, String prenom, String telephone, String email, String password) {
     	this.id = id;
         this.name = nom;
         this.firstName = prenom;
@@ -30,7 +30,7 @@ public class Personne implements Serializable {
         this.password = password;
     }
     
-    public Personne(String nom, String prenom, String telephone, String email, String password) {
+    public Person(String nom, String prenom, String telephone, String email, String password) {
         this.name = nom;
         this.firstName = prenom;
         this.phoneNumber = telephone;
@@ -101,16 +101,16 @@ public class Personne implements Serializable {
     	return Global.getFactory().getPersonneDAO().update(this);
     }
     
-    public Personne find() {
+    public Person find() {
     	return Global.getFactory().getPersonneDAO().find(this.id);
     }
     
-    public Personne find(long id) {
+    public Person find(long id) {
     	return Global.getFactory().getPersonneDAO().find(id);
     }
     
     // Liste en static pour éviter de créer un objet pour rien juste pour récup des objets en DB
-    public static List<? extends Personne> getAll(){ //Solution pour éviter problème de compatibilité entre liste pour héritage    	
+    public static List<? extends Person> getAll(){ //Solution pour éviter problème de compatibilité entre liste pour héritage    	
     	return Global.getFactory().getPersonneDAO().getAll();
     }
     
@@ -122,10 +122,10 @@ public class Personne implements Serializable {
     // Vérifier si email déjà présent ==> Pas de double compte sur même adresse mail donc adresse unique
     @SuppressWarnings("unchecked")
 	public static boolean checkEmail(String email) {
-		List<Personne> list = new LinkedList<>();
+		List<Person> list = new LinkedList<>();
 		int find = 0;
 		
-		list = (List<Personne>) getAll();
+		list = (List<Person>) getAll();
 		
 		for(int i = 0; i < list.size(); i++) {
 			if(list.get(i).email.equals(email)) {
@@ -142,13 +142,13 @@ public class Personne implements Serializable {
     
     // Connexion à un compte utilisateur
     @SuppressWarnings("unchecked")
-	public Personne login(String email, String password) {
-		List<Personne> list = new LinkedList<>();
-		Personne pers = new Personne();
+	public Person login(String email, String password) {
+		List<Person> list = new LinkedList<>();
+		Person pers = new Person();
 		int find = 0;
 		email = email.toLowerCase();
 		
-		list = (List<Personne>) getAll();
+		list = (List<Person>) getAll();
 		
 		for(int i = 0; i < list.size(); i++) {
 			if(list.get(i).email.equals(email) && list.get(i).getPassword().equals(password)) {
@@ -165,11 +165,11 @@ public class Personne implements Serializable {
 	}
     
     // Déterminer le type de l'utilisateur
-    public Object checkTypeUser(Personne pers) {
+    public Object checkTypeUser(Person pers) {
     	
-    	Client cli = new Client();
-    	Organisateur org = new Organisateur();
-    	Gestionnaire gest = new Gestionnaire();
+    	Spectator cli = new Spectator();
+    	Organizer org = new Organizer();
+    	Manager gest = new Manager();
     	
     	cli = cli.find(pers.getId());
     	org = org.find(pers.getId());

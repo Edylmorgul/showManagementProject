@@ -3,31 +3,31 @@ package POJO;
 import java.util.LinkedList;
 import java.util.List;
 
-public class Client extends Personne {	
+public class Spectator extends Person {	
 	
 	private static final long serialVersionUID = 1L;
 	
 	// Données
-	private List<Commande> listeCommande = new LinkedList<>();
+	private List<Order> listeCommande = new LinkedList<>();
 			
 	// Constructeurs
-	public Client() {
+	public Spectator() {
 		super();
 	}
 	
-	public Client(long id, String name, String firstName, String phoneNumber, String email, String password) {
+	public Spectator(long id, String name, String firstName, String phoneNumber, String email, String password) {
 		super(id, name, firstName, phoneNumber, email, password);
 	}
 	
-	public Client(String name, String firstName, String phoneNumber, String email, String password) {
+	public Spectator(String name, String firstName, String phoneNumber, String email, String password) {
 		super(name, firstName, phoneNumber, email, password);
 	}
 	
 	// GET/SET
-	public List<Commande> getListCommande() {
+	public List<Order> getListCommande() {
 		return listeCommande;
 	}
-	public void setCommande(List<Commande> listeCommande) {
+	public void setCommande(List<Order> listeCommande) {
 		this.listeCommande = listeCommande;
 	}
 
@@ -49,16 +49,16 @@ public class Client extends Personne {
 	}
 	
 	@Override
-	public Client find() {
+	public Spectator find() {
 		return Global.getFactory().getClientDAO().find(this.id);	
 	}
 	
 	@Override
-	public Client find(long id) {
+	public Spectator find(long id) {
 		return Global.getFactory().getClientDAO().find(id);	
 	}
 
-	public static List<Client> getAll() {
+	public static List<Spectator> getAll() {
 		return Global.getFactory().getClientDAO().getAll();
 	}
 }

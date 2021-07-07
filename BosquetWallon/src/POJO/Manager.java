@@ -2,22 +2,22 @@ package POJO;
 
 import java.util.List;
 
-public class Gestionnaire extends Personne {
+public class Manager extends Person {
 	
 	private static final long serialVersionUID = 1L;
 	
 	// Données
 	
 	// Constructeurs
-	public Gestionnaire() {
+	public Manager() {
 		super();
 	}
 	
-	public Gestionnaire(long id, String name, String firstName, String phoneNumber, String email, String password) {
+	public Manager(long id, String name, String firstName, String phoneNumber, String email, String password) {
 		super(id, name, firstName, phoneNumber, email, password);
 	}
 	
-	public Gestionnaire(String name, String firstName, String phoneNumber, String email, String password) {
+	public Manager(String name, String firstName, String phoneNumber, String email, String password) {
 		super(name, firstName,phoneNumber, email, password);
 	}
 
@@ -39,16 +39,16 @@ public class Gestionnaire extends Personne {
 	}
 
 	@Override
-	public Gestionnaire find() {
+	public Manager find() {
 		return Global.getFactory().getGestionnaireDAO().find(this.id);
 	}
 	
 	@Override
-	public Gestionnaire find(long id) {
+	public Manager find(long id) {
 		return Global.getFactory().getGestionnaireDAO().find(id);
 	}
 	
-	public static List<Gestionnaire> getAll() {
+	public static List<Manager> getAll() {
 		return Global.getFactory().getGestionnaireDAO().getAll();
 	}
 }

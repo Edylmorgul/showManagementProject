@@ -4,11 +4,11 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import POJO.Client;
-import POJO.Gestionnaire;
+import POJO.Spectator;
+import POJO.Manager;
 import POJO.Global;
-import POJO.Organisateur;
-import POJO.Personne;
+import POJO.Organizer;
+import POJO.Person;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -91,24 +91,24 @@ public class UserLogin extends JFrame {
 				else if(!passwordField.getText().matches(Global.getPasswordPattern()))						
 					JOptionPane.showMessageDialog(null, "Veuillez entrer un mot de passe correct ! (Minuscule + majuscule + nombre + 4 caractères minimums)");
 				else {
-					Personne pers = new Personne();
+					Person pers = new Person();
 					pers = pers.login(emailField.getText(), passwordField.getText());
 					if(pers != null) {
-						pers = (Personne) pers.checkTypeUser(pers);
-						if(pers instanceof Client) {
-							ClientAction frame = new ClientAction((Client) pers);				
+						pers = (Person) pers.checkTypeUser(pers);
+						if(pers instanceof Spectator) {
+							SpectatorAction frame = new SpectatorAction((Spectator) pers);				
 						    frame.setLocationRelativeTo(null);
 						    frame.setVisible(true);  
 						    dispose();
 						}					
-						else if(pers instanceof Organisateur) {
-							OrganizerAction frame = new OrganizerAction((Organisateur) pers);				
+						else if(pers instanceof Organizer) {
+							OrganizerAction frame = new OrganizerAction((Organizer) pers);				
 						    frame.setLocationRelativeTo(null);
 						    frame.setVisible(true);  
 						    dispose();
 						}
 						else {
-							ManagerAction frame = new ManagerAction((Gestionnaire) pers);				
+							ManagerAction frame = new ManagerAction((Manager) pers);				
 						    frame.setLocationRelativeTo(null);
 						    frame.setVisible(true);  
 						    dispose();

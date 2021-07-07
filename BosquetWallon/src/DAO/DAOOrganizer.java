@@ -8,16 +8,16 @@ import java.util.LinkedList;
 import java.util.List;
 
 import POJO.Global;
-import POJO.Organisateur;
+import POJO.Organizer;
 
-public class DAOOrganisateur extends DAO<Organisateur>{
+public class DAOOrganizer extends DAO<Organizer>{
 
-	public DAOOrganisateur(Connection conn){
+	public DAOOrganizer(Connection conn){
         super(conn);
     }
 
 	@Override
-	public boolean create(Organisateur obj) {		
+	public boolean create(Organizer obj) {		
 		try
         {       	
             PreparedStatement state = connect.prepareStatement("INSERT INTO T_organisateur(idOrganisateur) VALUES (?)");
@@ -36,20 +36,20 @@ public class DAOOrganisateur extends DAO<Organisateur>{
 	}
 
 	@Override
-	public boolean delete(Organisateur obj) {
+	public boolean delete(Organizer obj) {
 		
     	return Global.getFactory().getPersonneDAO().delete(obj);
 	}
 
 	@Override
-	public boolean update(Organisateur obj) {
+	public boolean update(Organizer obj) {
 				 	    			
     	return Global.getFactory().getPersonneDAO().update(obj);
 	}
 
 	@Override
-	public Organisateur find(long id) {
-		Organisateur org = null;
+	public Organizer find(long id) {
+		Organizer org = null;
         try{
         	String sql ="SELECT * FROM T_personne "
         			+ "INNER JOIN T_organisateur ON T_organisateur.idOrganisateur = T_personne.id "
@@ -58,7 +58,7 @@ public class DAOOrganisateur extends DAO<Organisateur>{
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
     ResultSet.CONCUR_READ_ONLY).executeQuery(sql);
             if(result.first())
-            	org = new Organisateur(id, result.getString("nom"), result.getString("prenom"), result.getString("telephone"), result.getString("email"), result.getString("password"));
+            	org = new Organizer(id, result.getString("nom"), result.getString("prenom"), result.getString("telephone"), result.getString("email"), result.getString("password"));
         }
         catch(SQLException e){
         	System.out.println("Catch Organisateur " + e.getMessage());
@@ -68,15 +68,15 @@ public class DAOOrganisateur extends DAO<Organisateur>{
 	}
 
 	@Override
-	public List<Organisateur> getAll() {
+	public List<Organizer> getAll() {
 		// 0. Obtenir tous les organisateurs
-		List<Organisateur> list = new LinkedList<>();
+		List<Organizer> list = new LinkedList<>();
 		 try {
 			 String sql ="SELECT * FROM T_personne "
 			 		+ "INNER JOIN T_organisateur ON T_organisateur.idOrganisateur = T_personne.id";
 			 ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeQuery(sql);
 			 while(result.next()) {
-				 Organisateur org = new Organisateur(result.getLong("idOrganisateur"), result.getString("nom"), result.getString("prenom"), result.getString("telephone"), result.getString("email"), result.getString("password"));
+				 Organizer org = new Organizer(result.getLong("idOrganisateur"), result.getString("nom"), result.getString("prenom"), result.getString("telephone"), result.getString("email"), result.getString("password"));
 				 list.add(org);
 			}
 		 } catch (SQLException e) {

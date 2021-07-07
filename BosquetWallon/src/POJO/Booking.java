@@ -4,7 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.io.Serializable;
 
-public class Reservation implements Serializable {
+public class Booking implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -14,15 +14,15 @@ public class Reservation implements Serializable {
 	private double solde = 0;
 	private int statut = 0;
 	private double prix = 0;
-	private Organisateur org;
+	private Organizer org;
 	private List<Planning> listPlan = new LinkedList<>();
 	
 	// Constructeurs
-	public Reservation() {
+	public Booking() {
 
     }
 	
-	public Reservation(long id, double acompte, double solde, int statut, double prix, Organisateur org) {
+	public Booking(long id, double acompte, double solde, int statut, double prix, Organizer org) {
 		this.id = id;
 		this.acompte = acompte;
 		this.solde = solde;
@@ -31,7 +31,7 @@ public class Reservation implements Serializable {
 		this.org = org;
 	}
 	
-	public Reservation(long id, double acompte, double solde, int statut, double prix) {
+	public Booking(long id, double acompte, double solde, int statut, double prix) {
 		this.id = id;
 		this.acompte = acompte;
 		this.solde = solde;
@@ -39,7 +39,7 @@ public class Reservation implements Serializable {
 		this.prix = prix;	
 	}
 	
-	public Reservation(double acompte, int statut, Organisateur org) {
+	public Booking(double acompte, int statut, Organizer org) {
 		this.acompte = acompte;
 		this.statut = statut;
 		this.org = org;
@@ -86,11 +86,11 @@ public class Reservation implements Serializable {
 		this.prix = prix;
 	}
 	
-	public Organisateur getOrganisateur() {
+	public Organizer getOrganisateur() {
 		return org;
 	}
 	
-	public void setOrganisateur(Organisateur org) {
+	public void setOrganisateur(Organizer org) {
 		this.org = org;
 	}
 	
@@ -115,15 +115,15 @@ public class Reservation implements Serializable {
 		return Global.getFactory().getReservationDAO().update(this);
 	}
 	
-	public Reservation find() {
+	public Booking find() {
 		return Global.getFactory().getReservationDAO().find(this.id);
 	}
 	
-	public Reservation find(long id) {
+	public Booking find(long id) {
 		return Global.getFactory().getReservationDAO().find(id);
 	}
 	
-	public static List<Reservation> getAll(){
+	public static List<Booking> getAll(){
 		return Global.getFactory().getReservationDAO().getAll();
 	}
 	

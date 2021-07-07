@@ -10,28 +10,28 @@ public class DAOFactory {
 	
 	// Construction des instances d'objets d'accès aux données
 	// Personne
-	public DAO<Personne> getPersonneDAO(){
-		return new DAOPersonne(conn);
+	public DAO<Person> getPersonneDAO(){
+		return new DAOPerson(conn);
 	}
 	
 	// Client
-	public DAO<Client> getClientDAO(){
-		return new DAOClient(conn);
+	public DAO<Spectator> getClientDAO(){
+		return new DAOSpectator(conn);
 	}
 	
 	// Organisateur
-	public DAO<Organisateur> getOrganisateurDAO(){
-		return new DAOOrganisateur(conn);
+	public DAO<Organizer> getOrganisateurDAO(){
+		return new DAOOrganizer(conn);
 	}
 	
 	// Gestionnaire
-	public DAO<Gestionnaire> getGestionnaireDAO(){
-		return new DAOGestionnaire(conn);
+	public DAO<Manager> getGestionnaireDAO(){
+		return new DAOManager(conn);
 	}
 	
 	// Artiste
-	public DAO<Artiste> getArtisteDAO(){
-		return new DAOArtiste(conn);
+	public DAO<Artist> getArtisteDAO(){
+		return new DAOArtist(conn);
 	}
 	
 	// Catégorie 
@@ -39,13 +39,13 @@ public class DAOFactory {
 	// Commande
 	
 	// Spectacle
-	public DAO<Spectacle> getSpectacleDAO(){
-		return new DAOSpectacle(conn);
+	public DAO<Show> getSpectacleDAO(){
+		return new DAOShow(conn);
 	}
 	
 	// Réservation
-	public DAO<Reservation> getReservationDAO(){
-		return new DAOReservation(conn);
+	public DAO<Booking> getReservationDAO(){
+		return new DAOBooking(conn);
 	}
 	
 	// Planning salle

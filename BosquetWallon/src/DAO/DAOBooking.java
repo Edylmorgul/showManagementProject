@@ -3,40 +3,40 @@ package DAO;
 import java.sql.Connection;
 import java.util.List;
 
-import POJO.Reservation;
+import POJO.Booking;
 
-public class DAOReservation extends DAO<Reservation>{
+public class DAOBooking extends DAO<Booking>{
 	
-	public DAOReservation(Connection conn) {
+	public DAOBooking(Connection conn) {
 		super(conn);
 	}
 
 	@Override
-	public boolean create(Reservation obj) {
+	public boolean create(Booking obj) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean delete(Reservation obj) {
+	public boolean delete(Booking obj) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean update(Reservation obj) {
+	public boolean update(Booking obj) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public Reservation find(long id) {
+	public Booking find(long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Reservation> getAll() {
+	public List<Booking> getAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}

@@ -6,10 +6,10 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
-import POJO.Client;
+import POJO.Spectator;
 import POJO.Global;
-import POJO.Organisateur;
-import POJO.Personne;
+import POJO.Organizer;
+import POJO.Person;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -42,7 +42,7 @@ public class UserEditAccount extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public UserEditAccount(Personne param) {
+	public UserEditAccount(Person param) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
 		contentPane = new JPanel();
@@ -119,7 +119,7 @@ public class UserEditAccount extends JFrame {
 		btnBackActionFrame(param);		
 	}
 	
-	private void editAccountFormFrame(Personne param) {
+	private void editAccountFormFrame(Person param) {
 		JButton btnValidate = new JButton("Valider");
 		btnValidate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -153,15 +153,15 @@ public class UserEditAccount extends JFrame {
 						 if(param.update()) {
 							JOptionPane.showMessageDialog(null, "Mise à jour de vos informations effectuées !");
 							
-							if(param instanceof Client) {
-								ClientAction frame = new ClientAction((Client) param);
+							if(param instanceof Spectator) {
+								SpectatorAction frame = new SpectatorAction((Spectator) param);
 								frame.setLocationRelativeTo(null);
 								frame.setVisible(true);  
 								dispose();
 							}
 							
 							else {
-								OrganizerAction frame = new OrganizerAction((Organisateur) param);
+								OrganizerAction frame = new OrganizerAction((Organizer) param);
 								frame.setLocationRelativeTo(null);
 								frame.setVisible(true);  
 								dispose();
@@ -177,20 +177,20 @@ public class UserEditAccount extends JFrame {
 		contentPane.add(btnValidate);
 	}
 	
-	private void btnBackActionFrame(Personne param) {
+	private void btnBackActionFrame(Person param) {
 		JButton btnBack = new JButton("Retour");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				if(param instanceof Client) {
-					ClientAction frame = new ClientAction((Client) param);
+				if(param instanceof Spectator) {
+					SpectatorAction frame = new SpectatorAction((Spectator) param);
 				    frame.setLocationRelativeTo(null);
 				    frame.setVisible(true);  
 				    dispose();
 				}
 				
 				else {
-					OrganizerAction frame = new OrganizerAction((Organisateur) param);
+					OrganizerAction frame = new OrganizerAction((Organizer) param);
 					frame.setLocationRelativeTo(null);
 					frame.setVisible(true);  
 					dispose();

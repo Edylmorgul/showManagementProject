@@ -4,7 +4,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import POJO.Gestionnaire;
+import POJO.Manager;
 
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -40,7 +40,7 @@ public class ManagerAction extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ManagerAction(Gestionnaire param) {
+	public ManagerAction(Manager param) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 450);
 		contentPane = new JPanel();
@@ -113,7 +113,7 @@ public class ManagerAction extends JFrame {
   
 	}
 	
-	private void btnDisplayUserFrame(Gestionnaire param) {
+	private void btnDisplayUserFrame(Manager param) {
 		JButton btnUser = new JButton("Utilisateurs");
 		btnUser.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -127,7 +127,7 @@ public class ManagerAction extends JFrame {
 		contentPane.add(btnUser);
 	}
 	
-	private void btnDisplayShowFrame(Gestionnaire param) {
+	private void btnDisplayShowFrame(Manager param) {
 		JButton btnSpect = new JButton("Spectacles");
 		btnSpect.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

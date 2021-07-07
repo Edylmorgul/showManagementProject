@@ -4,10 +4,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import POJO.Client;
+import POJO.Spectator;
 import POJO.Global;
-import POJO.Organisateur;
-import POJO.Personne;
+import POJO.Organizer;
+import POJO.Person;
 
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -141,13 +141,13 @@ public class UserFormRecord extends JFrame {
 					JOptionPane.showMessageDialog(null, "Veuillez entrer un email correct !");
 				else if(!passwordField.getText().matches(Global.getPasswordPattern()))						
 					JOptionPane.showMessageDialog(null, "Veuillez entrer un mot de passe correct ! (Minuscule + majuscule + nombre + 4 caractères minimums)");
-				else if(Personne.checkEmail(emailField.getText())) {
+				else if(Person.checkEmail(emailField.getText())) {
 					JOptionPane.showMessageDialog(null, "Cet email est déjà présent !");
 				}
 				else {
 					typeUser = typeUserCombo.getSelectedItem().toString();			
 					if(typeUser.equals("Client")) {
-						Client cli = new Client(nameField.getText(), firstNameField.getText(), phoneField.getText(), emailField.getText(), passwordField.getText());
+						Spectator cli = new Spectator(nameField.getText(), firstNameField.getText(), phoneField.getText(), emailField.getText(), passwordField.getText());
 						if(cli.create()) {
 							JOptionPane.showMessageDialog(null, "Enregistrement réussi !");
 							UserMainMenu frame = new UserMainMenu();
@@ -158,7 +158,7 @@ public class UserFormRecord extends JFrame {
 					}
 					
 					else if(typeUser.equals("Organisateur")) {
-						Organisateur org = new Organisateur(nameField.getText(), firstNameField.getText(), phoneField.getText(), emailField.getText(), passwordField.getText());
+						Organizer org = new Organizer(nameField.getText(), firstNameField.getText(), phoneField.getText(), emailField.getText(), passwordField.getText());
 						if(org.create()) {
 							JOptionPane.showMessageDialog(null, "Enregistrement réussi !");
 							UserMainMenu frame = new UserMainMenu();

@@ -3,7 +3,7 @@ package POJO;
 import java.io.Serializable;
 import java.util.List;
 
-public class Spectacle implements Serializable {
+public class Show implements Serializable {
 	
 	private static final long serialVersionUID = 1L;
 
@@ -14,24 +14,24 @@ public class Spectacle implements Serializable {
 	Configuration config;
 	
 	// Constructeurs
-	public Spectacle() {
+	public Show() {
 	
 	}
 	
-	public Spectacle(long id, String title, int numberPlaceByCli, Configuration config) {
+	public Show(long id, String title, int numberPlaceByCli, Configuration config) {
 		this.id = id;
 		this.title = title;
 		this.numberPlaceByCli = numberPlaceByCli;
 		this.config = config;
 	}
 	
-	public Spectacle(long id, String title, int numberPlaceByCli) {
+	public Show(long id, String title, int numberPlaceByCli) {
 		this.id = id;
 		this.title = title;
 		this.numberPlaceByCli = numberPlaceByCli;
 	}
 	
-	public Spectacle(String title, int numberPlaceByCli, Configuration config) {	
+	public Show(String title, int numberPlaceByCli, Configuration config) {	
 		this.title = title;
 		this.numberPlaceByCli = numberPlaceByCli;
 		this.config = config;
@@ -84,11 +84,11 @@ public class Spectacle implements Serializable {
 		return Global.getFactory().getSpectacleDAO().update(this);
 	}
 	
-	public Spectacle find() {
+	public Show find() {
 		return Global.getFactory().getSpectacleDAO().find(this.id);
 	}
 	
-	public static List<Spectacle> getAll(){
+	public static List<Show> getAll(){
 		return Global.getFactory().getSpectacleDAO().getAll();
 	}	
 		

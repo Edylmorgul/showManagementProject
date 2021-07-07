@@ -14,9 +14,9 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.EmptyBorder;
 
-import POJO.Organisateur;
+import POJO.Organizer;
 import POJO.Planning;
-import POJO.Reservation;
+import POJO.Booking;
 
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -44,7 +44,7 @@ public class OrganizerReservationPlanning extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public OrganizerReservationPlanning(Organisateur param) {
+	public OrganizerReservationPlanning(Organizer param) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 700, 600);
 		contentPane = new JPanel();
@@ -88,7 +88,7 @@ public class OrganizerReservationPlanning extends JFrame {
         btnBackOrganizerFrame(param); 
 	}
 	
-	private void displayDateFrame(Organisateur param) {
+	private void displayDateFrame(Organizer param) {
 		listDateAvailable = new JList<>();
         List<Planning> listPlan = new LinkedList<Planning>();
         listPlan = Planning.getDateAvailable();
@@ -121,7 +121,7 @@ public class OrganizerReservationPlanning extends JFrame {
         }
 	}
 	
-	private void btnAddReservationFrame(Organisateur param, boolean visible) {
+	private void btnAddReservationFrame(Organizer param, boolean visible) {
 		JButton btnReservation = new JButton("Reserver");
 		btnReservation.setVisible(visible);
         btnReservation.addActionListener(new ActionListener(){
@@ -144,7 +144,7 @@ public class OrganizerReservationPlanning extends JFrame {
         contentPane.add(btnReservation);
 	}
 	
-	private void btnValidateReservationFrame(Organisateur param, boolean visible) {
+	private void btnValidateReservationFrame(Organizer param, boolean visible) {
 		JButton btnContinue = new JButton("Continuer");
 		btnContinue.setVisible(visible);
         btnContinue.addActionListener(new ActionListener(){
@@ -163,7 +163,7 @@ public class OrganizerReservationPlanning extends JFrame {
         contentPane.add(btnContinue);
 	}
 	
-	private void btnBackOrganizerFrame(Organisateur param) {
+	private void btnBackOrganizerFrame(Organizer param) {
 		JButton btnBack = new JButton("Retour");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

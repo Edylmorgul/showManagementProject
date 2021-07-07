@@ -2,32 +2,32 @@ package POJO;
 
 import java.util.List;
 
-public class Artiste extends Personne {
+public class Artist extends Person {
 	
 	private static final long serialVersionUID = 1L;
 
 	// Données
 	String pseudo;
-	private Spectacle show;
+	private Show show;
 	
 	// Construteur
-	public Artiste() {
+	public Artist() {
 		super();
 	}
 	
-	public Artiste(long id, String name, String firstName, String phoneNumber, String email, String password, String pseudo, Spectacle show) {
+	public Artist(long id, String name, String firstName, String phoneNumber, String email, String password, String pseudo, Show show) {
 		super(id, name, firstName, phoneNumber, email, password);
 		this.pseudo = pseudo;
 		this.show = show;
 	}
 	
-	public Artiste(String name, String firstName, String phoneNumber, String email, String password, String pseudo, Spectacle show) {
+	public Artist(String name, String firstName, String phoneNumber, String email, String password, String pseudo, Show show) {
 		super(name, firstName, phoneNumber, email, password);
 		this.pseudo = pseudo;
 		this.show = show;
 	}
 	
-	public Artiste(String pseudo, Spectacle show) {
+	public Artist(String pseudo, Show show) {
 		this.pseudo = pseudo;
 		this.show = show;
 	}
@@ -41,11 +41,11 @@ public class Artiste extends Personne {
 		this.pseudo = pseudo;
 	}
 	
-	public Spectacle getShow() {
+	public Show getShow() {
 		return show;
 	}
 	
-	public void setShow(Spectacle show) {
+	public void setShow(Show show) {
 		this.show = show;
 	}
 
@@ -68,16 +68,16 @@ public class Artiste extends Personne {
 	}
 
 	@Override
-	public Artiste find() {	
+	public Artist find() {	
 		return Global.getFactory().getArtisteDAO().find(this.id);
 	}
 	
 	@Override
-	public Artiste find(long id) {	
+	public Artist find(long id) {	
 		return Global.getFactory().getArtisteDAO().find(id);
 	}
 
-	public static List<Artiste> getAll() {		
+	public static List<Artist> getAll() {		
 		return Global.getFactory().getArtisteDAO().getAll();
 	}
 }

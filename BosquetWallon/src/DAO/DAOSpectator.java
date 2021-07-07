@@ -7,17 +7,17 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
-import POJO.Client;
+import POJO.Spectator;
 import POJO.Global;
 
-public class DAOClient extends DAO<Client>{
+public class DAOSpectator extends DAO<Spectator>{
 
-    public DAOClient(Connection conn){
+    public DAOSpectator(Connection conn){
         super(conn);
     }
 
     @Override
-    public boolean create(Client obj) {
+    public boolean create(Spectator obj) {
     	
         try
         {        	
@@ -37,20 +37,20 @@ public class DAOClient extends DAO<Client>{
     }
     
     @Override
-    public boolean delete(Client obj){
+    public boolean delete(Spectator obj){
     	
     	return Global.getFactory().getPersonneDAO().delete(obj);
     }
 
     @Override
-    public boolean update(Client obj){
+    public boolean update(Spectator obj){
 		
     	return Global.getFactory().getPersonneDAO().update(obj);
     }
 
     @Override
-    public Client find(long id){    	
-    	Client client = null;
+    public Spectator find(long id){    	
+    	Spectator client = null;
         try{
         	String sql ="SELECT * FROM T_personne "
         			+ "INNER JOIN T_client ON T_client.idClient = T_personne.id "
@@ -59,7 +59,7 @@ public class DAOClient extends DAO<Client>{
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
     ResultSet.CONCUR_READ_ONLY).executeQuery(sql);
             if(result.first())
-            	client = new Client(id, result.getString("nom"), result.getString("prenom"), result.getString("telephone"), result.getString("email"), result.getString("password"));
+            	client = new Spectator(id, result.getString("nom"), result.getString("prenom"), result.getString("telephone"), result.getString("email"), result.getString("password"));
         }
         catch(SQLException e){
         	System.out.println("Catch Client " + e.getMessage());
@@ -70,14 +70,14 @@ public class DAOClient extends DAO<Client>{
     }
 
 	@Override
-	public List<Client> getAll() {		
-		List<Client> list = new LinkedList<>();
+	public List<Spectator> getAll() {		
+		List<Spectator> list = new LinkedList<>();
 		 try {
 			 String sql ="SELECT * FROM T_personne "
 			 		+ "INNER JOIN T_client ON T_client.idClient = T_personne.id";
 			 ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeQuery(sql);
 			 while(result.next()) {
-				 Client client = new Client(result.getLong("idClient"), result.getString("nom"), result.getString("prenom"), result.getString("telephone"), result.getString("email"), result.getString("password"));
+				 Spectator client = new Spectator(result.getLong("idClient"), result.getString("nom"), result.getString("prenom"), result.getString("telephone"), result.getString("email"), result.getString("password"));
 				 list.add(client);
 			}
 		 } catch (SQLException e) {

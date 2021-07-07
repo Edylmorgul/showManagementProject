@@ -20,20 +20,20 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
-import POJO.Client;
-import POJO.Gestionnaire;
-import POJO.Organisateur;
+import POJO.Spectator;
+import POJO.Manager;
+import POJO.Organizer;
 
 public class ManagerDisplayUser extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
-	private List<Client> listClient;
-	private List<Organisateur> listOrganizer;
-	private JList<Client> listObjClient;
-	private JList<Organisateur> listObjOrganizer;
-	private DefaultListModel<Client> listModelClient = new DefaultListModel<>();
-	private DefaultListModel<Organisateur> listModelOrganizer = new DefaultListModel<>();
+	private List<Spectator> listClient;
+	private List<Organizer> listOrganizer;
+	private JList<Spectator> listObjClient;
+	private JList<Organizer> listObjOrganizer;
+	private DefaultListModel<Spectator> listModelClient = new DefaultListModel<>();
+	private DefaultListModel<Organizer> listModelOrganizer = new DefaultListModel<>();
 	private JScrollPane scrollPaneClient;
 	private JScrollPane scrollPaneOrganizer;
 	private String[] typeUserTab = {"Client", "Organisateur"};
@@ -49,7 +49,7 @@ public class ManagerDisplayUser extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ManagerDisplayUser(Gestionnaire param) {
+	public ManagerDisplayUser(Manager param) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
@@ -103,12 +103,12 @@ public class ManagerDisplayUser extends JFrame {
 	}
 	
 	private void displayClientFrame() {		
-		listObjClient = new JList<Client>();		
-		listClient = new LinkedList<Client>();
+		listObjClient = new JList<Spectator>();		
+		listClient = new LinkedList<Spectator>();
 		listModelClient.removeAllElements(); // Refresh manuelle ==> myJlist.updateUi ne fonctionne pas
-        listClient = Client.getAll();  
+        listClient = Spectator.getAll();  
         
-        for (Client obj : listClient) {       	
+        for (Spectator obj : listClient) {       	
             listModelClient.addElement(obj);
         }
         
@@ -122,12 +122,12 @@ public class ManagerDisplayUser extends JFrame {
 	}
 	
 	private void displayOrganizerFrame() {
-		listObjOrganizer = new JList<Organisateur>();		
-		listOrganizer = new LinkedList<Organisateur>();
+		listObjOrganizer = new JList<Organizer>();		
+		listOrganizer = new LinkedList<Organizer>();
 		listModelOrganizer.removeAllElements();
-        listOrganizer = Organisateur.getAll();                   
+        listOrganizer = Organizer.getAll();                   
         
-        for (Organisateur obj : listOrganizer) {
+        for (Organizer obj : listOrganizer) {
             listModelOrganizer.addElement(obj);
         }
         
@@ -140,7 +140,7 @@ public class ManagerDisplayUser extends JFrame {
         contentPane.add(scrollPaneOrganizer);
 	}
 	
-	private void btnBackManagerFrame(Gestionnaire param) {
+	private void btnBackManagerFrame(Manager param) {
 		JButton btnBack = new JButton("Retour");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import POJO.Client;
+import POJO.Spectator;
 
 import javax.swing.JLabel;
 import javax.swing.JMenu;
@@ -17,7 +17,7 @@ import java.awt.event.ActionListener;
 import java.awt.Font;
 import javax.swing.SwingConstants;
 
-public class ClientAction extends JFrame {
+public class SpectatorAction extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -34,7 +34,7 @@ public class ClientAction extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ClientAction(Client param) {	
+	public SpectatorAction(Spectator param) {	
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
 		contentPane = new JPanel();
@@ -74,14 +74,14 @@ public class ClientAction extends JFrame {
 				
 	}
 	
-	private void initFrame(Client param) {
+	private void initFrame(Spectator param) {
 		JLabel nameClientLabel = new JLabel(param.getName() + " - " + param.getFirstName());
 		nameClientLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		nameClientLabel.setBounds(280, 15, 140, 30);
 		contentPane.add(nameClientLabel);
 	}
 	
-	private void optionFrame(Client param) {
+	private void optionFrame(Spectator param) {
 		JMenuBar optionBar = new JMenuBar();  
         menuOption = new JMenu("Options"); 
         
@@ -120,7 +120,7 @@ public class ClientAction extends JFrame {
         contentPane.setVisible(true);  
 	}
 	
-	private void btnDisplayShowFrame(Client cli) {
+	private void btnDisplayShowFrame(Spectator cli) {
 		JButton btnDispalyShow = new JButton("Spectacles");
 		btnDispalyShow.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -131,7 +131,7 @@ public class ClientAction extends JFrame {
 		contentPane.add(btnDispalyShow);
 	}
 	
-	private void btnDisplayReservationFrame(Client cli) {
+	private void btnDisplayReservationFrame(Spectator cli) {
 		JButton btnDisplayReservation = new JButton("Commandes");
 		btnDisplayReservation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

@@ -3,40 +3,40 @@ package DAO;
 import java.sql.Connection;
 import java.util.List;
 
-import POJO.Artiste;
+import POJO.Artist;
 
-public class DAOArtiste extends DAO<Artiste>{
+public class DAOArtist extends DAO<Artist>{
 
-    public DAOArtiste(Connection conn){
+    public DAOArtist(Connection conn){
         super(conn);
     }
 
 	@Override
-	public boolean create(Artiste obj) {
+	public boolean create(Artist obj) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean delete(Artiste obj) {
+	public boolean delete(Artist obj) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public boolean update(Artiste obj) {
+	public boolean update(Artist obj) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public Artiste find(long id) {
+	public Artist find(long id) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public List<Artiste> getAll() {
+	public List<Artist> getAll() {
 		// TODO Auto-generated method stub
 		return null;
 	}

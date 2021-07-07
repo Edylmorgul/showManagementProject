@@ -7,16 +7,16 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
-import POJO.Personne;
+import POJO.Person;
 
-public class DAOPersonne extends DAO<Personne> {
+public class DAOPerson extends DAO<Person> {
 
-    public DAOPersonne(Connection conn){
+    public DAOPerson(Connection conn){
         super(conn);
     }
 
 	@Override
-    public boolean create(Personne obj) {		
+    public boolean create(Person obj) {		
 		int id;
 		
         try
@@ -47,7 +47,7 @@ public class DAOPersonne extends DAO<Personne> {
     }
     
     @Override
-    public boolean delete(Personne obj){
+    public boolean delete(Person obj){
     	try
 		{
 			PreparedStatement state = connect.prepareStatement("DELETE FROM T_personne WHERE id = ?"); // Plusieurs façon de réaliser une requête ==> Diff entre delete et update
@@ -66,7 +66,7 @@ public class DAOPersonne extends DAO<Personne> {
     }
 
     @Override
-    public boolean update(Personne obj){
+    public boolean update(Person obj){
     	try {
             PreparedStatement state = connect.prepareStatement("UPDATE T_personne SET nom =?, prenom =?, telephone =?, email =?, password =? WHERE id = " + obj.getId());
             state.setString(1, obj.getName());
@@ -85,15 +85,15 @@ public class DAOPersonne extends DAO<Personne> {
     }
 
     @Override
-    public Personne find(long id){   	
-    	Personne pers = null;
+    public Person find(long id){   	
+    	Person pers = null;
         try{
             ResultSet result = this.connect.createStatement(
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
     ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM T_personne "
     		+ "WHERE id = " + id);
             if(result.first())
-            	pers = new Personne(id, result.getString("nom"), result.getString("prenom"), result.getString("telephone"), result.getString("email"), result.getString("password"));          
+            	pers = new Person(id, result.getString("nom"), result.getString("prenom"), result.getString("telephone"), result.getString("email"), result.getString("password"));          
         }
         catch(SQLException e){
         	System.out.println("Catch Personne " + e.getMessage());
@@ -103,13 +103,13 @@ public class DAOPersonne extends DAO<Personne> {
     }
 
 	@Override
-	public List<Personne> getAll() {		
-		List<Personne> list = new LinkedList<>();
+	public List<Person> getAll() {		
+		List<Person> list = new LinkedList<>();
 		 try {
 			 String sql ="SELECT * FROM T_personne";
 			 ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeQuery(sql);
 			 while(result.next()) {
-				 Personne pers = new Personne(result.getLong("id"), result.getString("nom"), result.getString("prenom"), result.getString("telephone"), result.getString("email"), result.getString("password")); 
+				 Person pers = new Person(result.getLong("id"), result.getString("nom"), result.getString("prenom"), result.getString("telephone"), result.getString("email"), result.getString("password")); 
 				 list.add(pers);
 			}
 		 } catch (SQLException e) {

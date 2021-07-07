@@ -17,16 +17,16 @@ public class Planning implements Serializable {
     private String startDate = null;
     private String endDate = null;
     private boolean available = false;
-    private Gestionnaire manager;
-    private Reservation reservation;
-    private Spectacle show; //==> Un spectacle avec une ou plusieurs representations par jour ou plusieurs spectacles avec une ou plusieurs representation par jour ? 
+    private Manager manager;
+    private Booking reservation;
+    private Show show; //==> Un spectacle avec une ou plusieurs representations par jour ou plusieurs spectacles avec une ou plusieurs representation par jour ? 
     
     // Constructeur
     public Planning() {
 
     }
     
-    public Planning(long id, String startDate, String endDate, boolean available, Gestionnaire manager, Reservation reservation, Spectacle show) {
+    public Planning(long id, String startDate, String endDate, boolean available, Manager manager, Booking reservation, Show show) {
         this.id = id;
         this.startDate = startDate;
         this.endDate = endDate;
@@ -43,7 +43,7 @@ public class Planning implements Serializable {
         this.available = available;
     }
     
-    public Planning(String startDate, String endDate, boolean available, Gestionnaire manager, Reservation reservation, Spectacle show) {
+    public Planning(String startDate, String endDate, boolean available, Manager manager, Booking reservation, Show show) {
         this.startDate = startDate;
         this.endDate = endDate;
         this.available = available;
@@ -85,27 +85,27 @@ public class Planning implements Serializable {
     	this.available = disponible;
     }
     
-    public Gestionnaire getManager() {
+    public Manager getManager() {
     	return manager;
     }
     
-    public void setManger(Gestionnaire manager) {
+    public void setManger(Manager manager) {
     	this.manager = manager;
     }
     
-    public Reservation getReservation() {
+    public Booking getReservation() {
     	return reservation;
     }
     
-    public void setReservation(Reservation reservation) {
+    public void setReservation(Booking reservation) {
     	this.reservation = reservation;
     }
     
-    public Spectacle getShow() {
+    public Show getShow() {
     	return show;
     }
     
-    public void setShow(Spectacle show) {
+    public void setShow(Show show) {
     	this.show = show;
     }
     

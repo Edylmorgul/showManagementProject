@@ -7,10 +7,10 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 import java.util.List;
 
-import POJO.Gestionnaire;
+import POJO.Manager;
 import POJO.Planning;
-import POJO.Reservation;
-import POJO.Spectacle;
+import POJO.Booking;
+import POJO.Show;
 
 public class DAOPlanning extends DAO<Planning>{
 	
@@ -83,10 +83,10 @@ public class DAOPlanning extends DAO<Planning>{
 
 	@Override
 	public Planning find(long id) {
-		Gestionnaire manager = null;
+		Manager manager = null;
     	Planning plan = null;
-    	Reservation reservation = null;
-    	Spectacle show = null;
+    	Booking reservation = null;
+    	Show show = null;
         try{
             ResultSet result = this.connect.createStatement(
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
@@ -97,9 +97,9 @@ public class DAOPlanning extends DAO<Planning>{
     		+ "FULL OUTER JOIN T_spectacle ON T_spectacle.id = T_planning.fkPlanSpec "
     		+ "WHERE T_planning.id = " + id);
             if(result.first()) {
-            	manager = new Gestionnaire(result.getLong("fkPlanGest"), result.getString("nom"), result.getString("prenom"), result.getString("telephone"), result.getString("email"), result.getString("password"));
-            	reservation = new Reservation(result.getLong("fkPlanReserv"), result.getDouble("acompte"), result.getDouble("solde"), result.getInt("statut"), result.getDouble("prix"));
-            	show = new Spectacle(result.getLong("fkPlanSpec"), result.getString("titre"), result.getInt("nbrPlaceParClient"));   
+            	manager = new Manager(result.getLong("fkPlanGest"), result.getString("nom"), result.getString("prenom"), result.getString("telephone"), result.getString("email"), result.getString("password"));
+            	reservation = new Booking(result.getLong("fkPlanReserv"), result.getDouble("acompte"), result.getDouble("solde"), result.getInt("statut"), result.getDouble("prix"));
+            	show = new Show(result.getLong("fkPlanSpec"), result.getString("titre"), result.getInt("nbrPlaceParClient"));   
             	plan = new Planning(id, result.getString("dateDebut"), result.getString("dateFin"), result.getBoolean("reserver"), manager, reservation, show); 
             }           	         
         }
@@ -121,9 +121,9 @@ public class DAOPlanning extends DAO<Planning>{
 			    		+ "FULL OUTER JOIN T_spectacle ON T_spectacle.id = T_planning.fkPlanSpec";
 			 ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeQuery(sql);
 			 while(result.next()) {
-				 Gestionnaire manager = new Gestionnaire(result.getLong("fkPlanGest"), result.getString("nom"), result.getString("prenom"), result.getString("telephone"), result.getString("email"), result.getString("password"));
-				 Reservation reservation = new Reservation(result.getLong("fkPlanReserv"), result.getDouble("acompte"), result.getDouble("solde"), result.getInt("statut"), result.getDouble("prix"));
-				 Spectacle show = new Spectacle(result.getLong("fkPlanSpec"), result.getString("titre"), result.getInt("nbrPlaceParClient"));   
+				 Manager manager = new Manager(result.getLong("fkPlanGest"), result.getString("nom"), result.getString("prenom"), result.getString("telephone"), result.getString("email"), result.getString("password"));
+				 Booking reservation = new Booking(result.getLong("fkPlanReserv"), result.getDouble("acompte"), result.getDouble("solde"), result.getInt("statut"), result.getDouble("prix"));
+				 Show show = new Show(result.getLong("fkPlanSpec"), result.getString("titre"), result.getInt("nbrPlaceParClient"));   
 				 Planning plan = new Planning(result.getLong("id"), result.getString("dateDebut"), result.getString("dateFin"), result.getBoolean("reserver"), manager, reservation, show); 	 
 				 list.add(plan);
 			}

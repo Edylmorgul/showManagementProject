@@ -5,7 +5,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import POJO.Organisateur;
+import POJO.Organizer;
 
 import javax.swing.JLabel;
 
@@ -34,7 +34,7 @@ public class OrganizerAction extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public OrganizerAction(Organisateur param) {
+	public OrganizerAction(Organizer param) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
 		contentPane = new JPanel();
@@ -76,14 +76,14 @@ public class OrganizerAction extends JFrame {
 		btnExitFrame();
 	}
 	
-	private void initFrame(Organisateur param) {		
+	private void initFrame(Organizer param) {		
 		JLabel nameOrganizerLabel = new JLabel(param.getName() + " - " + param.getFirstName());
 		nameOrganizerLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		nameOrganizerLabel.setBounds(280, 15, 140, 30);
 		contentPane.add(nameOrganizerLabel);
 	}
 	
-	private void optionFrame(Organisateur param) {
+	private void optionFrame(Organizer param) {
 		JMenuBar optionBar = new JMenuBar();  
         menuOption = new JMenu("Options"); 
         
@@ -123,7 +123,7 @@ public class OrganizerAction extends JFrame {
   
 	}
 	
-	private void btnReservationFrame(Organisateur param) {
+	private void btnReservationFrame(Organizer param) {
 		JButton btnReservation = new JButton("Louer salle");
 		btnReservation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -134,7 +134,7 @@ public class OrganizerAction extends JFrame {
 		contentPane.add(btnReservation);
 	}
 	
-	private void btnDisplayReservationFrame(Organisateur param) {
+	private void btnDisplayReservationFrame(Organizer param) {
 		JButton btnDisplayReservation = new JButton("Reservations");
 		btnDisplayReservation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -145,7 +145,7 @@ public class OrganizerAction extends JFrame {
 		contentPane.add(btnDisplayReservation);
 	}
 	
-	private void btnDisplayShowFrame(Organisateur param) {
+	private void btnDisplayShowFrame(Organizer param) {
 		JButton btnDisplayShow = new JButton("Spectacle");
 		btnDisplayShow.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
