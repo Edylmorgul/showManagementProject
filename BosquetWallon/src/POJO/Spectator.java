@@ -8,27 +8,49 @@ public class Spectator extends Person {
 	private static final long serialVersionUID = 1L;
 	
 	// Données
-	private List<Order> listeCommande = new LinkedList<>();
+	private String phoneNumber = "";
+	private String gender = "";
+	private List<Order> orderList = new LinkedList<>();
 			
 	// Constructeurs
 	public Spectator() {
 		super();
 	}
 	
-	public Spectator(long id, String name, String firstName, String phoneNumber, String email, String password) {
-		super(id, name, firstName, phoneNumber, email, password);
+	public Spectator(long id, String name, String firstName, String address, String email, String password, String phoneNumber, String gender) {
+		super(id, name, firstName, address, email, password);
+		this.phoneNumber = phoneNumber;
+		this.gender = gender;
 	}
 	
-	public Spectator(String name, String firstName, String phoneNumber, String email, String password) {
-		super(name, firstName, phoneNumber, email, password);
+	public Spectator(String name, String firstName, String address, String email, String password, String phoneNumber, String gender) {
+		super(name, firstName, address, email, password);
+		this.phoneNumber = phoneNumber;
+		this.gender = gender;
 	}
 	
 	// GET/SET
-	public List<Order> getListCommande() {
-		return listeCommande;
+	public String getPhoneNumber() {
+		return phoneNumber;
 	}
-	public void setCommande(List<Order> listeCommande) {
-		this.listeCommande = listeCommande;
+	
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+	
+	public String getGender() {
+		return gender;
+	}
+	
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	
+	public List<Order> getOrderList() {
+		return orderList;
+	}
+	public void setOrderList(List<Order> orderList) {
+		this.orderList = orderList;
 	}
 
 	// Methodes
@@ -45,7 +67,10 @@ public class Spectator extends Person {
 
 	@Override
 	public boolean update() {
-		return super.update();
+		if(super.update())
+			return Global.getFactory().getClientDAO().update(this);
+		
+		return false;
 	}
 	
 	@Override

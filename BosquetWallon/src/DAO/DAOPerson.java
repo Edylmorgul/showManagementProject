@@ -21,10 +21,10 @@ public class DAOPerson extends DAO<Person> {
 		
         try
         {        
-        	PreparedStatement state = connect.prepareStatement("INSERT INTO T_personne(nom, prenom, telephone, email, password) VALUES (?,?,?,?,?)");
+        	PreparedStatement state = connect.prepareStatement("INSERT INTO T_personne(nom, prenom, adresse, email, password) VALUES (?,?,?,?,?)");
             state.setString(1, obj.getName());
             state.setString(2, obj.getFirstName());
-            state.setString(3, obj.getPhoneNumber());
+            state.setString(3, obj.getAddress());
             state.setString(4, obj.getEmail());
             state.setString(5, obj.getPassword());
             state.execute();
@@ -68,10 +68,10 @@ public class DAOPerson extends DAO<Person> {
     @Override
     public boolean update(Person obj){
     	try {
-            PreparedStatement state = connect.prepareStatement("UPDATE T_personne SET nom =?, prenom =?, telephone =?, email =?, password =? WHERE id = " + obj.getId());
+            PreparedStatement state = connect.prepareStatement("UPDATE T_personne SET nom =?, prenom =?, adresse =?, email =?, password =? WHERE id = " + obj.getId());
             state.setString(1, obj.getName());
             state.setString(2, obj.getFirstName());
-            state.setString(3, obj.getPhoneNumber());
+            state.setString(3, obj.getAddress());
             state.setString(4, obj.getEmail());
             state.setString(5, obj.getPassword());
             state.executeUpdate();
@@ -93,7 +93,7 @@ public class DAOPerson extends DAO<Person> {
     ResultSet.CONCUR_READ_ONLY).executeQuery("SELECT * FROM T_personne "
     		+ "WHERE id = " + id);
             if(result.first())
-            	pers = new Person(id, result.getString("nom"), result.getString("prenom"), result.getString("telephone"), result.getString("email"), result.getString("password"));          
+            	pers = new Person(id, result.getString("nom"), result.getString("prenom"), result.getString("adresse"), result.getString("email"), result.getString("password"));          
         }
         catch(SQLException e){
         	System.out.println("Catch Personne " + e.getMessage());
@@ -109,7 +109,7 @@ public class DAOPerson extends DAO<Person> {
 			 String sql ="SELECT * FROM T_personne";
 			 ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeQuery(sql);
 			 while(result.next()) {
-				 Person pers = new Person(result.getLong("id"), result.getString("nom"), result.getString("prenom"), result.getString("telephone"), result.getString("email"), result.getString("password")); 
+				 Person pers = new Person(result.getLong("id"), result.getString("nom"), result.getString("prenom"), result.getString("adresse"), result.getString("email"), result.getString("password")); 
 				 list.add(pers);
 			}
 		 } catch (SQLException e) {

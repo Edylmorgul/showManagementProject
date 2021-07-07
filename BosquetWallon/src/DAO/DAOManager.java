@@ -43,7 +43,7 @@ public class DAOManager extends DAO<Manager> {
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
     ResultSet.CONCUR_READ_ONLY).executeQuery(sql);
             if(result.first())
-            	ges = new Manager(id, result.getString("nom"), result.getString("prenom"), result.getString("telephone"), result.getString("email"), result.getString("password"));
+            	ges = new Manager(id, result.getString("nom"), result.getString("prenom"), result.getString("adresse"), result.getString("email"), result.getString("password"), result.getString("telephone"));
         }
         catch(SQLException e){
         	System.out.println("Catch Gestionnaire " + e.getMessage());
@@ -60,7 +60,7 @@ public class DAOManager extends DAO<Manager> {
 			 		+ "INNER JOIN T_gestionnaire ON T_gestionnaire.idGestionnaire = T_personne.id";
 			 ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeQuery(sql);
 			 while(result.next()) {
-				 Manager manager = new Manager(result.getLong("idGestionnaire"), result.getString("nom"), result.getString("prenom"), result.getString("telephone"), result.getString("email"), result.getString("password"));
+				 Manager manager = new Manager(result.getLong("idGestionnaire"), result.getString("nom"), result.getString("prenom"), result.getString("adresse"), result.getString("email"), result.getString("password"), result.getString("telephone"));
 				 list.add(manager);
 			}
 		 } catch (SQLException e) {

@@ -7,18 +7,30 @@ public class Manager extends Person {
 	private static final long serialVersionUID = 1L;
 	
 	// Données
+	private String phoneNumber = "";
 	
 	// Constructeurs
 	public Manager() {
 		super();
 	}
 	
-	public Manager(long id, String name, String firstName, String phoneNumber, String email, String password) {
-		super(id, name, firstName, phoneNumber, email, password);
+	public Manager(long id, String name, String firstName, String address, String email, String password, String phoneNumber) {
+		super(id, name, firstName, address, email, password);
+		this.phoneNumber = phoneNumber;
 	}
 	
-	public Manager(String name, String firstName, String phoneNumber, String email, String password) {
-		super(name, firstName,phoneNumber, email, password);
+	public Manager(String name, String firstName, String address, String email, String password, String phoneNumber) {
+		super(name, firstName,address, email, password);
+		this.phoneNumber = phoneNumber;
+	}
+	
+	// GET/SET
+	public String getPhoneNumber() {
+		return phoneNumber;
+	}
+		
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
 	}
 
 	// Methodes

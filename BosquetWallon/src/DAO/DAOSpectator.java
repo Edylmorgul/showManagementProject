@@ -21,15 +21,17 @@ public class DAOSpectator extends DAO<Spectator>{
     	
         try
         {        	
-            PreparedStatement state = connect.prepareStatement("INSERT INTO T_client(idClient) VALUES (?)");
+            PreparedStatement state = connect.prepareStatement("INSERT INTO T_client(idClient, telephone, sexe) VALUES (?,?,?)");
             state.setLong(1, obj.getId());
+            state.setString(2, obj.getPhoneNumber());
+            state.setString(3, obj.getGender());
             state.execute();
             return true; 	               	
         }
 
         catch(SQLException e)
         {
-        	System.out.println("Catch Client " + e.getMessage());
+        	System.out.println("Catch Spectateur " + e.getMessage());
             e.printStackTrace();
         }
         
@@ -45,7 +47,26 @@ public class DAOSpectator extends DAO<Spectator>{
     @Override
     public boolean update(Spectator obj){
 		
-    	return Global.getFactory().getPersonneDAO().update(obj);
+    	// Modifier personne
+    	if(Global.getFactory().getPersonneDAO().update(obj)) {
+    		// Modifier spectateur
+    		try {
+                PreparedStatement state = connect.prepareStatement("UPDATE T_client SET telephone =?, sexe =? WHERE idClient = " + obj.getId());
+                state.setString(1, obj.getPhoneNumber());
+                state.setString(2, obj.getGender());
+                state.executeUpdate();
+                return true;
+             }
+             catch (SQLException e) {
+            	 System.out.println("Catch Spectateur " + e.getMessage());
+            	 e.printStackTrace();
+            }  
+    		
+    		return false;
+    	}
+    	
+    	else
+    		return false;
     }
 
     @Override
@@ -59,10 +80,10 @@ public class DAOSpectator extends DAO<Spectator>{
                     ResultSet.TYPE_SCROLL_INSENSITIVE,
     ResultSet.CONCUR_READ_ONLY).executeQuery(sql);
             if(result.first())
-            	client = new Spectator(id, result.getString("nom"), result.getString("prenom"), result.getString("telephone"), result.getString("email"), result.getString("password"));
+            	client = new Spectator(id, result.getString("nom"), result.getString("prenom"), result.getString("adresse"), result.getString("email"), result.getString("password"), result.getString("telephone"), result.getString("sexe"));
         }
         catch(SQLException e){
-        	System.out.println("Catch Client " + e.getMessage());
+        	System.out.println("Catch Spectateur " + e.getMessage());
             e.printStackTrace();
         }
         
@@ -77,11 +98,11 @@ public class DAOSpectator extends DAO<Spectator>{
 			 		+ "INNER JOIN T_client ON T_client.idClient = T_personne.id";
 			 ResultSet result = this.connect.createStatement(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY).executeQuery(sql);
 			 while(result.next()) {
-				 Spectator client = new Spectator(result.getLong("idClient"), result.getString("nom"), result.getString("prenom"), result.getString("telephone"), result.getString("email"), result.getString("password"));
+				 Spectator client = new Spectator(result.getLong("idClient"), result.getString("nom"), result.getString("prenom"), result.getString("adresse"), result.getString("email"), result.getString("password"), result.getString("telephone"), result.getString("sexe"));
 				 list.add(client);
 			}
 		 } catch (SQLException e) {
-			 System.out.println("Catch Client " + e.getMessage());
+			 System.out.println("Catch Spectateur " + e.getMessage());
 			 e.printStackTrace();
 		}	
 		 

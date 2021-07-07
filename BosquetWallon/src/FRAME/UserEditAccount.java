@@ -31,6 +31,7 @@ public class UserEditAccount extends JFrame {
 	private JTextField passwordField;
 	private JCheckBox deleteAccountCheckBox;
 	private JPanel contentPane;
+	private JTextField addressField;
 
 	/**
 	 * Launch the application.
@@ -42,7 +43,7 @@ public class UserEditAccount extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public UserEditAccount(Person param) {
+	public UserEditAccount(Object param) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
 		contentPane = new JPanel();
@@ -80,37 +81,46 @@ public class UserEditAccount extends JFrame {
 		
 		JLabel lblNewLabel_3 = new JLabel("Supprimer compte :");
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNewLabel_3.setBounds(300, 140, 120, 20);
+		lblNewLabel_3.setBounds(300, 180, 120, 20);
 		contentPane.add(lblNewLabel_3);
+		
+		JLabel lblNewLabel = new JLabel("Adresse :");
+		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblNewLabel.setBounds(300, 140, 90, 20);
+		contentPane.add(lblNewLabel);
 				
 		nameField = new JTextField();
 		nameField.setBounds(140, 100, 90, 20);
-		nameField.setText(param.getName());
 		contentPane.add(nameField);
 		nameField.setColumns(10);
 				
 		firstNameField = new JTextField();
 		firstNameField.setBounds(140, 140, 90, 20);
-		firstNameField.setText(param.getFirstName());
 		contentPane.add(firstNameField);
 		firstNameField.setColumns(10);
 				
 		phoneField = new JTextField();
 		phoneField.setToolTipText("Ex : 0494 64 78 74");
 		phoneField.setBounds(140, 180, 90, 20);
-		phoneField.setText(param.getPhoneNumber());
 		contentPane.add(phoneField);
 		phoneField.setColumns(10);
 				
 		passwordField = new JTextField();
 		passwordField.setToolTipText("Ex : Billy123");
-		passwordField.setText(param.getPassword());
 		passwordField.setBounds(400, 100, 90, 20);
 		contentPane.add(passwordField);
 		
+		addressField = new JTextField();
+		addressField.setBounds(400, 140, 90, 20);
+		contentPane.add(addressField);
+		addressField.setColumns(10);
+		
 		deleteAccountCheckBox = new JCheckBox("");
-		deleteAccountCheckBox.setBounds(420, 140, 30, 20);
+		deleteAccountCheckBox.setBounds(420, 180, 30, 20);
 		contentPane.add(deleteAccountCheckBox);
+		
+		// Initialiser valeur
+		initFrame(param);
 		
 		// Editer compte
 		editAccountFormFrame(param);
@@ -119,12 +129,33 @@ public class UserEditAccount extends JFrame {
 		btnBackActionFrame(param);		
 	}
 	
-	private void editAccountFormFrame(Person param) {
+	private void initFrame(Object param) {		
+		if(param instanceof Spectator) {
+			Spectator spec = (Spectator) param;
+			nameField.setText(spec.getName());
+			firstNameField.setText(spec.getFirstName());
+			phoneField.setText(spec.getPhoneNumber());
+			passwordField.setText(spec.getPassword());
+			addressField.setText(spec.getAddress());
+		}
+		
+		else {
+			Organizer org = (Organizer) param;
+			nameField.setText(org.getName());
+			firstNameField.setText(org.getFirstName());
+			phoneField.setText(org.getPhoneNumber());
+			passwordField.setText(org.getPassword());
+			addressField.setText(org.getAddress());
+		}
+	}
+	
+	private void editAccountFormFrame(Object param) {
 		JButton btnValidate = new JButton("Valider");
 		btnValidate.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(deleteAccountCheckBox.isSelected() == true) {
-					if(param.delete()) {
+					Person pers = (Person) param;
+					if(pers.delete()) {
 						JOptionPane.showMessageDialog(null, "Suppression effectuée !");
 						UserMainMenu frame = new UserMainMenu();
 						frame.setLocationRelativeTo(null);
@@ -136,7 +167,7 @@ public class UserEditAccount extends JFrame {
 				}
 				
 				else {
-					if(nameField.getText().isEmpty() || firstNameField.getText().isEmpty() || phoneField.getText().isEmpty() || passwordField.getText().isEmpty())
+					if(nameField.getText().isEmpty() || firstNameField.getText().isEmpty() || phoneField.getText().isEmpty() || passwordField.getText().isEmpty() || addressField.getText().isEmpty())
 						JOptionPane.showMessageDialog(null, "Veuillez remplir les champs !");	
 					else if(!nameField.getText().matches(Global.getLetterPattern()) || !firstNameField.getText().matches(Global.getLetterPattern()))
 						JOptionPane.showMessageDialog(null, "Veuillez entrer un nom et prénom correct !");
@@ -145,30 +176,45 @@ public class UserEditAccount extends JFrame {
 					else if(!passwordField.getText().matches(Global.getPasswordPattern()))						
 						JOptionPane.showMessageDialog(null, "Veuillez entrer un mot de passe correct ! (Minuscule + majuscule + nombre + 4 caractères minimums)");
 					else {
-						 param.setName(nameField.getText());		
-						 param.setFirstName(firstNameField.getText());
-						 param.setPhoneNumber(phoneField.getText());
-						 param.setPassword(passwordField.getText());
-						 
-						 if(param.update()) {
-							JOptionPane.showMessageDialog(null, "Mise à jour de vos informations effectuées !");
-							
-							if(param instanceof Spectator) {
+						if(param instanceof Spectator) {
+							 Spectator spec = (Spectator) param;
+							 spec.setName(nameField.getText());		
+							 spec.setFirstName(firstNameField.getText());
+							 spec.setPhoneNumber(phoneField.getText());
+							 spec.setPassword(passwordField.getText());
+							 spec.setAddress(addressField.getText());
+							 
+							 if(spec.update()) {
+								JOptionPane.showMessageDialog(null, "Mise à jour de vos informations effectuées !");
+								
 								SpectatorAction frame = new SpectatorAction((Spectator) param);
 								frame.setLocationRelativeTo(null);
 								frame.setVisible(true);  
-								dispose();
-							}
+								dispose();																			
+							 }
+							 else
+								 JOptionPane.showMessageDialog(null, "Edition de compte échouée !");
+						}
+						
+						else {
+							Organizer org = (Organizer) param;
+							org.setName(nameField.getText());		
+							org.setFirstName(firstNameField.getText());
+							org.setPhoneNumber(phoneField.getText());
+							org.setPassword(passwordField.getText());
+							org.setAddress(addressField.getText());
 							
-							else {
+							if(org.update()) {
+								JOptionPane.showMessageDialog(null, "Mise à jour de vos informations effectuées !");
+													
 								OrganizerAction frame = new OrganizerAction((Organizer) param);
 								frame.setLocationRelativeTo(null);
 								frame.setVisible(true);  
-								dispose();
-							}						
-						 }
-						 else
-							 JOptionPane.showMessageDialog(null, "Edition de compte échouée !");
+								dispose();																								
+							 }
+							 else
+								 JOptionPane.showMessageDialog(null, "Edition de compte échouée !");													
+						}	
 					}	
 				}																					
 			}
@@ -177,7 +223,7 @@ public class UserEditAccount extends JFrame {
 		contentPane.add(btnValidate);
 	}
 	
-	private void btnBackActionFrame(Person param) {
+	private void btnBackActionFrame(Object param) {
 		JButton btnBack = new JButton("Retour");
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

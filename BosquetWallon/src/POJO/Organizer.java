@@ -8,27 +8,49 @@ public class Organizer extends Person {
 	private static final long serialVersionUID = 1L;
 	
 	// Données
-	private List<Booking> listeReservation = new LinkedList<>();
+	private List<Booking> bookingList = new LinkedList<>();
+	private String phoneNumber = "";
+	private String gender = "";
 	
 	// Constructeurs
 	public Organizer() {
 		super();
 	}
 	
-	public Organizer(long id, String name, String firstName, String phoneNumber, String email, String password) {
-		super(id, name, firstName, phoneNumber, email, password);
+	public Organizer(long id, String name, String firstName, String address, String email, String password, String phoneNumber, String gender) {
+		super(id, name, firstName, address, email, password);
+		this.phoneNumber = phoneNumber;
+		this.gender = gender;
 	}
 	
-	public Organizer(String name, String firstName, String phoneNumber, String email, String password) {
-		super(name, firstName, phoneNumber, email, password);
+	public Organizer(String name, String firstName, String address, String email, String password, String phoneNumber, String gender) {
+		super(name, firstName, address, email, password);
+		this.phoneNumber = phoneNumber;
+		this.gender = gender;
 	}
 	
 	// GET/SET
-	public List<Booking> getListReservation() {
-		return listeReservation;
+	public String getPhoneNumber() {
+		return phoneNumber;
 	}
-	public void setListReservation(List<Booking> listeReservation) {
-		this.listeReservation = listeReservation;
+		
+	public void setPhoneNumber(String phoneNumber) {
+		this.phoneNumber = phoneNumber;
+	}
+	
+	public String getGender() {
+		return gender;
+	}
+	
+	public void setGender(String gender) {
+		this.gender = gender;
+	}
+	
+	public List<Booking> getBookingList() {
+		return bookingList;
+	}
+	public void setBookingList(List<Booking> bookingList) {
+		this.bookingList = bookingList;
 	}
 
 	// Méthodes
@@ -45,8 +67,10 @@ public class Organizer extends Person {
 
 	@Override
 	public boolean update() {
-		super.update();
-		return Global.getFactory().getOrganisateurDAO().update(this);
+		if(super.update())
+			return Global.getFactory().getOrganisateurDAO().update(this);
+		
+		return false;
 	}
 
 	@Override

@@ -49,6 +49,9 @@ public class DAOFactory {
 	}
 	
 	// Planning salle
+	public DAO<Planning> getPlanningDAO(){
+		return new DAOPlanning(conn);
+	}
 	
 	// Configuration
 	

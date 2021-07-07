@@ -94,21 +94,23 @@ public class UserLogin extends JFrame {
 					Person pers = new Person();
 					pers = pers.login(emailField.getText(), passwordField.getText());
 					if(pers != null) {
-						pers = (Person) pers.checkTypeUser(pers);
-						if(pers instanceof Spectator) {
-							SpectatorAction frame = new SpectatorAction((Spectator) pers);				
+						if(pers.checkTypeUser() instanceof Spectator) {
+							Spectator spec = (Spectator) pers.checkTypeUser();
+							SpectatorAction frame = new SpectatorAction(spec);				
 						    frame.setLocationRelativeTo(null);
 						    frame.setVisible(true);  
 						    dispose();
 						}					
-						else if(pers instanceof Organizer) {
-							OrganizerAction frame = new OrganizerAction((Organizer) pers);				
+						else if(pers.checkTypeUser() instanceof Organizer) {
+							Organizer org = (Organizer) pers.checkTypeUser();
+							OrganizerAction frame = new OrganizerAction(org);				
 						    frame.setLocationRelativeTo(null);
 						    frame.setVisible(true);  
 						    dispose();
 						}
 						else {
-							ManagerAction frame = new ManagerAction((Manager) pers);				
+							Manager manager = (Manager) pers.checkTypeUser();
+							ManagerAction frame = new ManagerAction(manager);				
 						    frame.setLocationRelativeTo(null);
 						    frame.setVisible(true);  
 						    dispose();

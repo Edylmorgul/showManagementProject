@@ -30,8 +30,12 @@ public class UserFormRecord extends JFrame {
 	private JTextField emailField;
 	private JPasswordField passwordField;
 	private String[] typeUserTab = {"Client", "Organisateur"};
+	private String[] typeSexTab = {"Homme", "Femme", "Autre"};
 	private String typeUser;
-	private JComboBox<String> typeUserCombo;	
+	private String typeSex;
+	private JComboBox<String> typeUserCombo;
+	private JComboBox<String> typeSexCombo;
+	private JTextField addressField;
 
 	/**
 	 * Launch the application.
@@ -86,8 +90,18 @@ public class UserFormRecord extends JFrame {
 		
 		JLabel lblNewLabel_3 = new JLabel("Type compte :");
 		lblNewLabel_3.setFont(new Font("Tahoma", Font.PLAIN, 12));
-		lblNewLabel_3.setBounds(300, 180, 90, 20);
+		lblNewLabel_3.setBounds(300, 220, 90, 20);
 		contentPane.add(lblNewLabel_3);
+		
+		JLabel lblNewLabel_6 = new JLabel("Sexe :");
+		lblNewLabel_6.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblNewLabel_6.setBounds(40, 220, 90, 20);
+		contentPane.add(lblNewLabel_6);
+		
+		JLabel lblNewLabel_7 = new JLabel("Adresse :");
+		lblNewLabel_7.setFont(new Font("Tahoma", Font.PLAIN, 12));
+		lblNewLabel_7.setBounds(300, 180, 90, 20);
+		contentPane.add(lblNewLabel_7);
 		
 		nameField = new JTextField();
 		nameField.setBounds(140, 100, 90, 20);
@@ -115,9 +129,18 @@ public class UserFormRecord extends JFrame {
 		passwordField.setBounds(400, 140, 90, 20);
 		contentPane.add(passwordField);
 		
+		addressField = new JTextField();
+		addressField.setBounds(400, 180, 90, 20);
+		contentPane.add(addressField);
+		addressField.setColumns(10);
+		
 		typeUserCombo = new JComboBox(typeUserTab);
-		typeUserCombo.setBounds(400, 180, 90, 20);
+		typeUserCombo.setBounds(400, 220, 90, 20);
 		contentPane.add(typeUserCombo);
+		
+		typeSexCombo = new JComboBox(typeSexTab);
+		typeSexCombo.setBounds(140, 220, 90, 20);
+		contentPane.add(typeSexCombo);
 		
 		// Valider l'enregistrement en tant que client ou organisateur (Gestionnaire ==> Admin, présent en dur dans la database)
 		registerFormFrame();
@@ -131,7 +154,7 @@ public class UserFormRecord extends JFrame {
 		btnValidate.addActionListener(new ActionListener() {
 			@SuppressWarnings("deprecation")
 			public void actionPerformed(ActionEvent e) {
-				if(nameField.getText().isEmpty() || firstNameField.getText().isEmpty() || phoneField.getText().isEmpty() || emailField.getText().isEmpty() || passwordField.getText().isEmpty())
+				if(nameField.getText().isEmpty() || firstNameField.getText().isEmpty() || phoneField.getText().isEmpty() || emailField.getText().isEmpty() || passwordField.getText().isEmpty() || addressField.getText().isEmpty())
 					JOptionPane.showMessageDialog(null, "Veuillez remplir les champs !");	
 				else if(!nameField.getText().matches(Global.getLetterPattern()) || !firstNameField.getText().matches(Global.getLetterPattern()))
 					JOptionPane.showMessageDialog(null, "Veuillez entrer un nom et prénom correct !");
@@ -145,9 +168,10 @@ public class UserFormRecord extends JFrame {
 					JOptionPane.showMessageDialog(null, "Cet email est déjà présent !");
 				}
 				else {
-					typeUser = typeUserCombo.getSelectedItem().toString();			
+					typeUser = typeUserCombo.getSelectedItem().toString();	
+					typeSex = typeSexCombo.getSelectedItem().toString();
 					if(typeUser.equals("Client")) {
-						Spectator cli = new Spectator(nameField.getText(), firstNameField.getText(), phoneField.getText(), emailField.getText(), passwordField.getText());
+						Spectator cli = new Spectator(nameField.getText(), firstNameField.getText(), addressField.getText(), emailField.getText(), passwordField.getText(), phoneField.getText(), typeSex);
 						if(cli.create()) {
 							JOptionPane.showMessageDialog(null, "Enregistrement réussi !");
 							UserMainMenu frame = new UserMainMenu();
@@ -158,7 +182,7 @@ public class UserFormRecord extends JFrame {
 					}
 					
 					else if(typeUser.equals("Organisateur")) {
-						Organizer org = new Organizer(nameField.getText(), firstNameField.getText(), phoneField.getText(), emailField.getText(), passwordField.getText());
+						Organizer org = new Organizer(nameField.getText(), firstNameField.getText(), addressField.getText(), emailField.getText(), passwordField.getText(), phoneField.getText(), typeSex);
 						if(org.create()) {
 							JOptionPane.showMessageDialog(null, "Enregistrement réussi !");
 							UserMainMenu frame = new UserMainMenu();

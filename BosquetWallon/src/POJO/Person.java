@@ -12,28 +12,29 @@ public class Person implements Serializable {
     protected long id = 0;
     protected String name = "";
     protected String firstName = "";
-    protected String phoneNumber = "";
+    protected String address = "";
     protected String email = "";
     protected String password = "";
+    //protected String role = ""; ==> Vraiment neccessaire de rajouter un rôle car utilisation d'une methode pour déterminer type utilisateur ? 
     
     // Constructeurs
     public Person() {
     	
     }
     
-    public Person(long id, String nom, String prenom, String telephone, String email, String password) {
+    public Person(long id, String name, String firstName, String address, String email, String password) {
     	this.id = id;
-        this.name = nom;
-        this.firstName = prenom;
-        this.phoneNumber = telephone;
+        this.name = name;
+        this.firstName = firstName;
+        this.address = address;
         this.email = email;
         this.password = password;
     }
     
-    public Person(String nom, String prenom, String telephone, String email, String password) {
-        this.name = nom;
-        this.firstName = prenom;
-        this.phoneNumber = telephone;
+    public Person(String name, String firstName, String address, String email, String password) {
+        this.name = name;
+        this.firstName = firstName;
+        this.address = address;
         this.email = email;
         this.password = password;
     }
@@ -63,12 +64,12 @@ public class Person implements Serializable {
         this.firstName = prenom;
     }
     
-    public String getPhoneNumber() {
-        return phoneNumber;
+    public String getAddress() {
+    	return address;
     }
-
-    public void setPhoneNumber(String telephone) {
-        this.phoneNumber = telephone;
+    
+    public void setAddress(String address) {
+    	this.address = address;
     }
     
     public String getEmail() {
@@ -116,7 +117,7 @@ public class Person implements Serializable {
     
     @Override
     public String toString() { 
-        return String.format("Nom : " + name + " - " + "Prénom : " + firstName + " - " + "Numéro de téléphone : " + phoneNumber + " - " + "Email : " + email + " - " + "Mot de passe : " +  password); 
+    	return String.format("Nom : " + name + " - " + "Prénom : " + firstName + " - " + "Adresse : " + address + " - " + "Email : " + email + " - " + "Mot de passe : " +  password);  
     } 
     
     // Vérifier si email déjà présent ==> Pas de double compte sur même adresse mail donc adresse unique
@@ -165,15 +166,15 @@ public class Person implements Serializable {
 	}
     
     // Déterminer le type de l'utilisateur
-    public Object checkTypeUser(Person pers) {
+    public Object checkTypeUser() {
     	
     	Spectator cli = new Spectator();
     	Organizer org = new Organizer();
     	Manager gest = new Manager();
     	
-    	cli = cli.find(pers.getId());
-    	org = org.find(pers.getId());
-    	gest = gest.find(pers.getId());
+    	cli = cli.find(this.getId());
+    	org = org.find(this.getId());
+    	gest = gest.find(this.getId());
     	
     	if(cli != null)
     		return cli;
