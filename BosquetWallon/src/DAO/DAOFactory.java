@@ -39,8 +39,14 @@ public class DAOFactory {
 	// Commande
 	
 	// Spectacle
+	public DAO<Spectacle> getSpectacleDAO(){
+		return new DAOSpectacle(conn);
+	}
 	
 	// Réservation
+	public DAO<Reservation> getReservationDAO(){
+		return new DAOReservation(conn);
+	}
 	
 	// Planning salle
 	
