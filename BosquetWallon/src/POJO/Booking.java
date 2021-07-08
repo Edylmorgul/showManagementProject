@@ -10,38 +10,38 @@ public class Booking implements Serializable {
 	
 	// Données
 	private long id = 0;
-	private double acompte = 0;
-	private double solde = 0;
-	private int statut = 0;
-	private double prix = 0;
+	private double deposit = 0;
+	private double balance = 0;
+	private int status = 0;
+	private double price = 0;
 	private Organizer org;
-	private List<Planning> listPlan = new LinkedList<>();
+	private List<Planning> planningList = new LinkedList<>();
 	
 	// Constructeurs
 	public Booking() {
 
     }
 	
-	public Booking(long id, double acompte, double solde, int statut, double prix, Organizer org) {
+	public Booking(long id, double deposit, double balance, int status, double price, Organizer org) {
 		this.id = id;
-		this.acompte = acompte;
-		this.solde = solde;
-		this.statut = statut;
-		this.prix = prix;	
+		this.deposit = deposit;
+		this.balance = balance;
+		this.status = status;
+		this.price = price;	
 		this.org = org;
 	}
 	
-	public Booking(long id, double acompte, double solde, int statut, double prix) {
+	public Booking(long id, double deposit, double balance, int status, double price) {
 		this.id = id;
-		this.acompte = acompte;
-		this.solde = solde;
-		this.statut = statut;
-		this.prix = prix;	
+		this.deposit = deposit;
+		this.balance = balance;
+		this.status = status;
+		this.price = price;	
 	}
 	
-	public Booking(double acompte, int statut, Organizer org) {
-		this.acompte = acompte;
-		this.statut = statut;
+	public Booking(double deposit, int statut, Organizer org) {
+		this.deposit = deposit;
+		this.status = statut;
 		this.org = org;
 	}
 	
@@ -54,52 +54,52 @@ public class Booking implements Serializable {
 	    this.id = id;
 	}
 	
-	public double getAcompte() {
-		return acompte;
+	public double getDeposit() {
+		return deposit;
 	}
 
-	public void setAcompte(double acompte) {
-		this.acompte = acompte;
+	public void setDeposit(double deposit) {
+		this.deposit = deposit;
 	}
 	
-	public double getSolde() {
-		return solde;
+	public double getBalance() {
+		return balance;
 	}
 
-	public void setSolde(double solde) {
-		this.solde = solde;
+	public void setBalance(double balance) {
+		this.balance = balance;
 	}
 	
-	public int getStatut() {
-		return statut;
+	public int getStatus() {
+		return status;
 	}
 	
-	public void setStatut(int statut) {
-		this.statut = statut;
+	public void setStatus(int status) {
+		this.status = status;
 	}
 	
-	public double getPrix() {
-		return prix;
+	public double getPrice() {
+		return price;
 	}
 
-	public void setPrix(double prix) {
-		this.prix = prix;
+	public void setPrice(double price) {
+		this.price = price;
 	}
 	
-	public Organizer getOrganisateur() {
+	public Organizer getOrganizer() {
 		return org;
 	}
 	
-	public void setOrganisateur(Organizer org) {
+	public void setOrganizer(Organizer org) {
 		this.org = org;
 	}
 	
-	public List<Planning> getListPlanning(){
-		return listPlan;
+	public List<Planning> getPlanningList(){
+		return planningList;
 	}
 	
-	public void setListPlan(List<Planning> listPlan) {
-		this.listPlan = listPlan;
+	public void setPlanningList(List<Planning> planningList) {
+		this.planningList = planningList;
 	}
 	
 	// Methodes
@@ -129,19 +129,70 @@ public class Booking implements Serializable {
 	
 	@Override
     public String toString() { 
-        return String.format("Prix location salle : " + prix + " - " + "Acompte : " + acompte + " - " + "Solde à payer : " + solde); 
+        return String.format("Prix location salle : " + price + " - " + "Acompte : " + deposit + " - " + "Solde à payer : " + balance); 
     } 
 	
 	// Calcul du solde selon prix + acompte - montant déjà payé par utilisateur = restant dû à payer 
-	public double calculateSolde(double montant, String op) {
+	public double calculateBalance(double amount, String op) {
 		if(op.equals("-")) {
-			this.solde -= montant;
+			this.balance -= amount;
 		}
 		
 		else {
-			this.solde += montant;
+			this.balance += amount;
 		}
 		
-		return this.solde;
+		return this.balance;
+	}
+	
+	// Calcul du solde de la reservation ==> Acompte + prix location des salles + tarif si plusieurs jours
+	public double calculateTotalPrice() {
+		int numberDay = 0;
+			
+		for(Planning plan : this.planningList) {
+			this.price += plan.rentalPrice();
+			numberDay ++;
+		}
+			
+		this.price = calculateReduction(numberDay, price);
+		this.balance = this.deposit + this.price;
+		return this.balance;
+	}
+		
+	// Calculer reduction par nombre de jours
+	private double calculateReduction(int numberDay, double price) {
+		double reduc;
+			
+		if(numberDay == 2) {
+			reduc = price * 0.05;
+			price -= reduc;
+		}
+			
+		if(numberDay >= 3 && numberDay <7) {
+			reduc = price * 0.10;
+			price -= reduc;
+		}
+			
+		if(numberDay >=7 && numberDay < 15) {
+			reduc = price * 0.20;
+			price -= reduc;
+		}
+			
+		if(numberDay > 15) {
+			reduc = price * 0.30;
+			price -= reduc;
+		}
+		return price;
+	}
+	
+	// Obtenir liste des planning par reservation
+	public void getListPlanningByReservation() {
+		List<Planning> list = Planning.getAll();
+			
+		this.planningList.clear();
+		for(Planning plan : list) {
+			if(plan.getReservation().getId() == this.id)
+				this.planningList.add(plan);			
+		}
 	}
 }

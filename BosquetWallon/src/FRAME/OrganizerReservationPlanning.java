@@ -14,6 +14,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.EmptyBorder;
 
+import POJO.Booking;
 import POJO.Organizer;
 import POJO.Planning;
 
@@ -153,7 +154,14 @@ public class OrganizerReservationPlanning extends JFrame {
             	else if(listPlan.isEmpty())
             		JOptionPane.showMessageDialog(null, "Veuillez réserver une date avant de continuer !");
             	else {
-            		JOptionPane.showMessageDialog(null, "Reservation effectuée !");               
+            		Booking res = new Booking(5000,1, param);
+            		res.setOrganizer(param);
+            		res.setPlanningList(listPlan);
+            		res.calculateTotalPrice();
+                    OrganizerSummaryReservation frame = new OrganizerSummaryReservation(res, param);
+                    frame.setLocationRelativeTo(null);
+                    frame.setVisible(true);
+                    dispose();              
             	}                   
             }
         });
@@ -167,9 +175,9 @@ public class OrganizerReservationPlanning extends JFrame {
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				OrganizerAction frame = new OrganizerAction(param);
-					  frame.setLocationRelativeTo(null);
-					  frame.setVisible(true);  
-					  dispose();
+				frame.setLocationRelativeTo(null);
+				frame.setVisible(true);  
+				dispose();
 			}
 		});
 		btnBack.setBounds(290, 490, 120, 40);
