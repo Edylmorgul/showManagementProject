@@ -86,4 +86,15 @@ public class Organizer extends Person {
 	public static List<Organizer> getAll() {		
 		return Global.getFactory().getOrganizerDAO().getAll();
 	}
+	
+	// Obtenir la liste des reservations d'un organisateur
+	public void getListBookingByOrganizer() {
+		List<Booking> list = Booking.getAll();
+		this.bookingList.clear(); // Solution temporaire pour régler petit bug d'affichage au niveau des listes
+			
+		for(Booking res : list) {
+			if(res.getOrganizer().getId() == this.id)
+				this.bookingList.add(res);			
+		}		
+	}
 }

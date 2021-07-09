@@ -127,7 +127,10 @@ public class OrganizerAction extends JFrame {
 		JButton btnReservation = new JButton("Louer salle");
 		btnReservation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				OrganizerReservationPlanning frame = new OrganizerReservationPlanning(param);				
+			    frame.setLocationRelativeTo(null);
+			    frame.setVisible(true);  
+			    dispose();
 			}
 		});
 		btnReservation.setBounds(230, 150, 120, 40);
