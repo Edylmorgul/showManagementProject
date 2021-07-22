@@ -124,20 +124,15 @@ public class Person implements Serializable {
     @SuppressWarnings("unchecked")
 	public static boolean checkEmail(String email) {
 		List<Person> list = new LinkedList<>();
-		int find = 0;
 		
 		list = (List<Person>) getAll();
 		
 		for(int i = 0; i < list.size(); i++) {
 			if(list.get(i).email.equals(email)) {
-				find = 1;
+				return true;
 			}
 		}
-		
-		if(find == 1) {
-			return true;
-		}
-		
+				
 		return false;
 	}
     
@@ -146,7 +141,6 @@ public class Person implements Serializable {
 	public Person login(String email, String password) {
 		List<Person> list = new LinkedList<>();
 		Person pers = new Person();
-		int find = 0;
 		email = email.toLowerCase();
 		
 		list = (List<Person>) getAll();
@@ -154,12 +148,8 @@ public class Person implements Serializable {
 		for(int i = 0; i < list.size(); i++) {
 			if(list.get(i).email.equals(email) && list.get(i).getPassword().equals(password)) {
 				pers = list.get(i);
-				find = 1;
+				break;
 			}
-		}
-		
-		if(find == 0) {
-			return null;
 		}
 		
 		return pers;
@@ -168,19 +158,19 @@ public class Person implements Serializable {
     // Déterminer le type de l'utilisateur
     public Object checkTypeUser() {
     	
-    	Spectator cli = new Spectator();
+    	Spectator spec = new Spectator();
     	Organizer org = new Organizer();
     	Manager gest = new Manager();
     	
-    	cli = cli.find(this.getId());
-    	org = org.find(this.getId());
-    	gest = gest.find(this.getId());
+    	spec = spec.find(this.getId());
+    	if(spec != null)
+    		return spec;
     	
-    	if(cli != null)
-    		return cli;
-    	else if(org != null)
+    	org = org.find(this.getId());
+    	if(org != null)
     		return org;
-    	else
-    		return gest;
+    	
+    	gest = gest.find(this.getId());     	
+    	return gest;
     }
 }

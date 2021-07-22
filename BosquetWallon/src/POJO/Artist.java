@@ -8,7 +8,7 @@ public class Artist extends Person {
 
 	// Données
 	String pseudo;
-	private Show show;
+	private Show show = null;
 	
 	// Construteur
 	public Artist() {

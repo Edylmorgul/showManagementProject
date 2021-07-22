@@ -10,7 +10,8 @@ public class Show implements Serializable {
 	// Données
 	private long id = 0;
 	private String title = "";
-	private int numberPlaceByCli = 0;
+	private String description = "";
+	private int tiketPerPerson = 0;
 	Configuration config;
 	
 	// Constructeurs
@@ -18,22 +19,25 @@ public class Show implements Serializable {
 	
 	}
 	
-	public Show(long id, String title, int numberPlaceByCli, Configuration config) {
+	public Show(long id, String title, String description, int tiketPerPerson, Configuration config) {
 		this.id = id;
 		this.title = title;
-		this.numberPlaceByCli = numberPlaceByCli;
+		this.description = description;
+		this.tiketPerPerson = tiketPerPerson;
 		this.config = config;
 	}
 	
-	public Show(long id, String title, int numberPlaceByCli) {
+	public Show(long id, String title, String description, int tiketPerPerson) {
 		this.id = id;
 		this.title = title;
-		this.numberPlaceByCli = numberPlaceByCli;
+		this.description = description;
+		this.tiketPerPerson = tiketPerPerson;
 	}
 	
-	public Show(String title, int numberPlaceByCli, Configuration config) {	
+	public Show(String title, String description, int tiketPerPerson, Configuration config) {	
 		this.title = title;
-		this.numberPlaceByCli = numberPlaceByCli;
+		this.description = description;
+		this.tiketPerPerson = tiketPerPerson;
 		this.config = config;
 	}
 	
@@ -54,12 +58,20 @@ public class Show implements Serializable {
 		this.title = titre;
 	}
 	
-	public int getNumberPlaceByCli() {
-		return numberPlaceByCli;
+	public String getDescription() {
+		return description;
 	}
 	
-	public void setNumberPlaceByCli(int numberPlaceByCli) {
-		this.numberPlaceByCli = numberPlaceByCli;
+	public void setDescription(String description) {
+		this.description = description;
+	}
+	
+	public int getTiketPerPerson() {
+		return tiketPerPerson;
+	}
+	
+	public void setTiketPerPerson(int numberPlaceByCli) {
+		this.tiketPerPerson = numberPlaceByCli;
 	}
 	
 	public Configuration getConfig(){

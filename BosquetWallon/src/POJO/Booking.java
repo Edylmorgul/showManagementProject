@@ -14,7 +14,7 @@ public class Booking implements Serializable {
 	private double balance = 0;
 	private int status = 0;
 	private double price = 0;
-	private Organizer org;
+	private Organizer org = null;
 	private List<Planning> planningList = new LinkedList<>();
 	
 	// Constructeurs

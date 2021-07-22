@@ -86,6 +86,11 @@ public class Spectator extends Person {
 	public static List<Spectator> getAll() {
 		return Global.getFactory().getSpectatorDAO().getAll();
 	}
+	
+	@Override
+    public String toString() { 
+        return String.format(super.toString() + " telephone : " + phoneNumber + " sexe : " + gender); 
+    }
 }
 
 /*

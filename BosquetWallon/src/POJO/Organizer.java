@@ -87,6 +87,11 @@ public class Organizer extends Person {
 		return Global.getFactory().getOrganizerDAO().getAll();
 	}
 	
+	@Override
+    public String toString() { 
+        return String.format(super.toString() + " telephone : " + phoneNumber + " sexe : " + gender); 
+    }
+	
 	// Obtenir la liste des reservations d'un organisateur
 	public void getListBookingByOrganizer() {
 		List<Booking> list = Booking.getAll();

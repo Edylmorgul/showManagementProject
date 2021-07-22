@@ -54,6 +54,9 @@ public class DAOFactory {
 	}
 	
 	// Configuration
+	public DAO<Configuration> getConfigurationDAO(){
+		return new DAOConfiguration(conn);
+	}
 	
 	// Place
 

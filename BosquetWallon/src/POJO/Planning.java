@@ -17,9 +17,9 @@ public class Planning implements Serializable {
     private String startDate = null;
     private String endDate = null;
     private boolean available = false;
-    private Manager manager;
-    private Booking reservation;
-    private Show show; //==> Un spectacle avec une ou plusieurs representations par jour ou plusieurs spectacles avec une ou plusieurs representation par jour ? 
+    private Manager manager = null;
+    private Booking reservation = null;
+    private Show show = null; //==> Un spectacle avec une ou plusieurs representations par jour ou plusieurs spectacles avec une ou plusieurs representation par jour ? 
     
     // Constructeur
     public Planning() {
