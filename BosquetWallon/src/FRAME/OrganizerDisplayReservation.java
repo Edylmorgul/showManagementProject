@@ -146,7 +146,39 @@ public class OrganizerDisplayReservation extends JFrame {
 		JButton btnDeleteReservation = new JButton("Annuler");
 		btnDeleteReservation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				if(listReservation.getSelectedValue() == null) 
+            		JOptionPane.showMessageDialog(null, "Veuillez choisir une reservation à supprimer !");           	           	
+            	else {
+            		boolean statut = false;
+            		Booking res = listReservation.getSelectedValue();            		
+            		res.getListPlanningByReservation();
+            		
+            		for(Planning plan : res.getPlanningList()) {
+            			if(plan.getShow().getId() != 0) {
+            				statut = true;
+            			}                      				
+            		}    
+            		
+            		if(statut) {
+            			JOptionPane.showMessageDialog(null, "Spectacle(s) déjà présent pour cette reservation, veuillez contacter l'administrateur pour annulation !");
+            		}
+            		
+            		else {            			
+            			if(res.delete()) {
+            				for(Planning plan : res.getPlanningList()) {
+            					res.setId(0);
+            					plan.setAvailable(false);
+                				plan.setReservation(res);  
+                				plan.update();             				
+                			}       					
+        				}  
+            			else
+            				JOptionPane.showMessageDialog(null, "Une erreur est survenue lors de la suppression de la reservation !");
+            			
+                		listModel.clear(); // Refresh 
+                		preventUpdateJlistFrame(param);       			         			
+            		}          		
+            	}
 			}
 		});
 		btnDeleteReservation.setBounds(340, 430, 120, 40);

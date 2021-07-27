@@ -51,6 +51,11 @@ public class DAOFactory {
 		return new DAOBooking(conn);
 	}
 	
+	// Représentation
+	public DAO<Representation> getRepresentationDAO(){
+		return new DAORepresentation(conn);
+	}
+	
 	// Planning salle
 	public DAO<Planning> getPlanningDAO(){
 		return new DAOPlanning(conn);

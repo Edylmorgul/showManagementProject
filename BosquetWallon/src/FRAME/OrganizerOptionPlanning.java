@@ -88,7 +88,10 @@ public class OrganizerOptionPlanning extends JFrame {
             	else if(plan.getShow().getId()!= 0)
             		JOptionPane.showMessageDialog(null, "Un spectacle est déjà présent pour cette date !");
             	else {
-                                    
+            		OrganizerFormCreateShow frame = new OrganizerFormCreateShow(res, org, plan);
+                    frame.setLocationRelativeTo(null);
+                    frame.setVisible(true);
+                    dispose();                 
             	}                   
             }
         });

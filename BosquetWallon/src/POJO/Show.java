@@ -15,6 +15,7 @@ public class Show implements Serializable {
 	private int tiketPerPerson = 0;
 	Configuration config;
 	List<Artist> artistList = new LinkedList<Artist>();
+	List<Representation> representationList = new LinkedList<>();
 	List<Category> categoryList = new LinkedList<>();
 	
 	// Constructeurs
@@ -85,6 +86,14 @@ public class Show implements Serializable {
 		this.artistList = artistList;
 	}
 	
+	public List<Representation> getRepresentationList(){
+		return representationList;
+	}
+	
+	public void setRepresentationList(List<Representation> representationList) {
+		this.representationList = representationList;
+	}
+	
 	public List<Category> getCategoryList(){
 		return categoryList;
 	}
@@ -152,6 +161,17 @@ public class Show implements Serializable {
 				if(art.getShow().getId() == this.id)
 					this.artistList.add(art);
 			}			
+		}
+		
+		// Obtenir liste des représentations par spectacle
+		public void getListRepresentationByShow(){
+	        List<Representation> list = Representation.getAll();
+	        this.representationList.clear();
+	        
+	        for(Representation res : list) {
+	        	if(res.getShow().getId() == this.id)
+	        		this.representationList.add(res);
+	        }
 		}
 		
 		// Obtenir liste des catégories par spectacle
