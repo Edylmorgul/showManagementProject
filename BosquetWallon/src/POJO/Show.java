@@ -1,6 +1,7 @@
 package POJO;
 
 import java.io.Serializable;
+import java.util.LinkedList;
 import java.util.List;
 
 public class Show implements Serializable {
@@ -13,6 +14,8 @@ public class Show implements Serializable {
 	private String description = "";
 	private int tiketPerPerson = 0;
 	Configuration config;
+	List<Artist> artistList = new LinkedList<Artist>();
+	List<Category> categoryList = new LinkedList<>();
 	
 	// Constructeurs
 	public Show() {
@@ -74,6 +77,22 @@ public class Show implements Serializable {
 		this.tiketPerPerson = numberPlaceByCli;
 	}
 	
+	public List<Artist> getArtistList() {
+		return artistList;
+	}
+	
+	public void setArtistList(List<Artist> artistList) {
+		this.artistList = artistList;
+	}
+	
+	public List<Category> getCategoryList(){
+		return categoryList;
+	}
+	
+	public void setCategoryList(List<Category> categoryList) {
+		this.categoryList = categoryList;
+	}
+	
 	public Configuration getConfig(){
 		return config;
 	}
@@ -103,6 +122,48 @@ public class Show implements Serializable {
 	public static List<Show> getAll(){
 		return Global.getFactory().getShowDAO().getAll();
 	}	
+	
+	// Vérifier si nom de spectacle déjà présent en DB
+		public static boolean checkNameShow(String titre) {
+			List<Show> liste = new LinkedList<Show>();
+			int find = 0;
+			
+			liste = getAll();
+			
+			for(int i = 0; i < liste.size(); i++) {
+				if(liste.get(i).getTitle().equals(titre)) {
+					find = 1;
+				}
+			}
+			
+			if(find == 1) {
+				return true;
+			}
+			
+			return false;
+		}
+		
+		// Obtenir liste des artistes par spectacle
+		public void getListArtistByShow() {
+			List<Artist> list = Artist.getAll();
+			this.artistList.clear();
+			
+			for(Artist art : list) {
+				if(art.getShow().getId() == this.id)
+					this.artistList.add(art);
+			}			
+		}
+		
+		// Obtenir liste des catégories par spectacle
+		public void getListCategorieByShow(){
+			List<Category> list = Category.getAll();
+			this.categoryList.clear();
+			
+			for(Category cat : list) {
+				if(cat.getShow().getId() == this.id)
+					this.categoryList.add(cat);
+			}
+		}
 		
 	@Override
     public String toString() { 

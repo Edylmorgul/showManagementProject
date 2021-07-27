@@ -35,6 +35,9 @@ public class DAOFactory {
 	}
 	
 	// Catégorie 
+	public DAO<Category> getCategoryDAO(){
+		return new DAOCategory(conn);
+	}
 	
 	// Commande
 	

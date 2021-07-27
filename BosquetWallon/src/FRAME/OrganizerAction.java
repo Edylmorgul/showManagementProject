@@ -141,7 +141,10 @@ public class OrganizerAction extends JFrame {
 		JButton btnDisplayReservation = new JButton("Reservations");
 		btnDisplayReservation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				OrganizerDisplayReservation frame = new OrganizerDisplayReservation(param);				
+			    frame.setLocationRelativeTo(null);
+			    frame.setVisible(true);  
+			    dispose();
 			}
 		});
 		btnDisplayReservation.setBounds(230, 200, 120, 40);

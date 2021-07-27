@@ -105,7 +105,11 @@ public class OrganizerDisplayReservation extends JFrame {
 				if(listReservation.getSelectedValue() == null) 
             		JOptionPane.showMessageDialog(null, "Veuillez choisir une reservation !");           	           	
             	else {
-            		JOptionPane.showMessageDialog(null, "Choisi !");
+            		Booking res = listReservation.getSelectedValue();
+            		OrganizerOptionPlanning frame = new OrganizerOptionPlanning(param, res);
+        			frame.setLocationRelativeTo(null);
+    				frame.setVisible(true);  
+    				dispose();
             	}
 			}
 		});
