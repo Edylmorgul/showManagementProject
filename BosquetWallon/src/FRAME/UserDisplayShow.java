@@ -196,12 +196,7 @@ public class UserDisplayShow extends JFrame {
 				if(listShow.getSelectedValue() == null)
 					JOptionPane.showMessageDialog(null, "Veuillez choisir un spectacle !");					
 				else { 
-						Show show = listShow.getSelectedValue();
-						show.getListRepresentationByShow();
-                        SpectatorReservationShow frame = new SpectatorReservationShow((Spectator) param, show);
-                        frame.setLocationRelativeTo(null);
-                        frame.setVisible(true);
-                        dispose();
+						
 					}
 				}
 		});
@@ -216,7 +211,10 @@ public class UserDisplayShow extends JFrame {
 				if(listShow.getSelectedValue() == null)
 					JOptionPane.showMessageDialog(null, "Veuillez choisir un spectacle !");
 				else {
-                   
+					Show show = listShow.getSelectedValue();
+                    UserDetailsInfosShow frame = new UserDetailsInfosShow(show);
+                    frame.setLocationRelativeTo(null);
+                    frame.setVisible(true);
 				}
 			}
 		});
