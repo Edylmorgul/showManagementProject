@@ -155,7 +155,10 @@ public class OrganizerAction extends JFrame {
 		JButton btnDisplayShow = new JButton("Spectacle");
 		btnDisplayShow.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				UserDisplayShow frame = new UserDisplayShow(param);				
+			    frame.setLocationRelativeTo(null);
+			    frame.setVisible(true);  
+			    dispose();
 			}
 		});
 		btnDisplayShow.setBounds(230, 250, 120, 40);

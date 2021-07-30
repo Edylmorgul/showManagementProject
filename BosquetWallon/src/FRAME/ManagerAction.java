@@ -131,7 +131,10 @@ public class ManagerAction extends JFrame {
 		JButton btnSpect = new JButton("Spectacles");
 		btnSpect.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				ManagerDisplayUser frame = new ManagerDisplayUser(param);
+				frame.setLocationRelativeTo(null);
+				frame.setVisible(true);  
+				dispose();
 			}
 		});
 		btnSpect.setBounds(230, 220, 120, 40);
