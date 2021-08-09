@@ -12,7 +12,7 @@ public class Show implements Serializable {
 	private long id = 0;
 	private String title = "";
 	private String description = "";
-	private int tiketPerPerson = 0;
+	private int ticketPerPerson = 0;
 	Configuration config;
 	List<Artist> artistList = new LinkedList<Artist>();
 	List<Representation> representationList = new LinkedList<>();
@@ -23,25 +23,25 @@ public class Show implements Serializable {
 	
 	}
 	
-	public Show(long id, String title, String description, int tiketPerPerson, Configuration config) {
+	public Show(long id, String title, String description, int ticketPerPerson, Configuration config) {
 		this.id = id;
 		this.title = title;
 		this.description = description;
-		this.tiketPerPerson = tiketPerPerson;
+		this.ticketPerPerson = ticketPerPerson;
 		this.config = config;
 	}
 	
-	public Show(long id, String title, String description, int tiketPerPerson) {
+	public Show(long id, String title, String description, int ticketPerPerson) {
 		this.id = id;
 		this.title = title;
 		this.description = description;
-		this.tiketPerPerson = tiketPerPerson;
+		this.ticketPerPerson = ticketPerPerson;
 	}
 	
-	public Show(String title, String description, int tiketPerPerson, Configuration config) {	
+	public Show(String title, String description, int ticketPerPerson, Configuration config) {	
 		this.title = title;
 		this.description = description;
-		this.tiketPerPerson = tiketPerPerson;
+		this.ticketPerPerson = ticketPerPerson;
 		this.config = config;
 	}
 	
@@ -70,12 +70,12 @@ public class Show implements Serializable {
 		this.description = description;
 	}
 	
-	public int getTiketPerPerson() {
-		return tiketPerPerson;
+	public int getTicketPerPerson() {
+		return ticketPerPerson;
 	}
 	
-	public void setTiketPerPerson(int numberPlaceByCli) {
-		this.tiketPerPerson = numberPlaceByCli;
+	public void setTiketPerPerson(int ticketPerPerson) {
+		this.ticketPerPerson = ticketPerPerson;
 	}
 	
 	public List<Artist> getArtistList() {

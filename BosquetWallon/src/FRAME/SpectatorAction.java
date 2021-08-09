@@ -124,7 +124,10 @@ public class SpectatorAction extends JFrame {
 		JButton btnDispalyShow = new JButton("Spectacles");
 		btnDispalyShow.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				UserDisplayShow frame = new UserDisplayShow(cli);				
+			    frame.setLocationRelativeTo(null);
+			    frame.setVisible(true);  
+			    dispose();
 			}
 		});
 		btnDispalyShow.setBounds(230, 140, 120, 40);
