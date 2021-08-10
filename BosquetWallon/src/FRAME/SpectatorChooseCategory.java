@@ -136,7 +136,10 @@ public class SpectatorChooseCategory extends JFrame {
 							JOptionPane.showMessageDialog(null, "Une erreur est survenue pour la mise à jour des places disponibles !");
 											
 						else {
-							JOptionPane.showMessageDialog(null, "Ok !");
+							SpectatorFormOrder frame = new SpectatorFormOrder(cli, show, representation, tabSpinner);
+						    frame.setLocationRelativeTo(null);
+						    frame.setVisible(true);  
+						    dispose();
 						}												
 					}
 				}			

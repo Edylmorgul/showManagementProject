@@ -67,5 +67,7 @@ public class DAOFactory {
 	}
 	
 	// Place
-
+	public DAO<Ticket> getTicketDAO(){
+		return new DAOTicket(conn);
+	}
 }
