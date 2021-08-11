@@ -142,7 +142,28 @@ public class SpectatorFormOrder extends JFrame {
                     modeLivraison = "Securise";
                 }
              
-                // Partie commande
+                // On renvoi le tout pour confirmation de livraison mais sans insertions DB tant que client n'a pas confirmer son achat
+                Order commande = new Order(modePayement, modeLivraison, cli);
+                List<Ticket> listPlace = new LinkedList<>();
+                
+                // Calcul du prix pour chaque place
+                for(int i = 0; i< tabSpinner.length ; i++) {
+                	for(int j = 0; j <Integer.parseInt(tabSpinner[i].getValue().toString()) ; j++){
+                		Ticket place = new Ticket(commande, rep);
+                    	place.calculateTicketPrice(show.getConfig(), show.getCategoryList().get(i));
+                    	listPlace.add(place);
+                    	//System.out.println(show.getListCategorie().get(i).toString() + place.toString());
+                	}               	
+        		}  
+                
+                // Calcul du tatal de la commande
+                commande.calculateTotalOrder(listPlace, modeLivraison);
+                
+                // Redirection vers le résumé de la reservation des places pour validation
+                SpectatorSummaryOrder frame = new SpectatorSummaryOrder(cli, commande, show, tabSpinner, listPlace);
+                frame.setLocationRelativeTo(null);
+                frame.setVisible(true);
+                dispose();
              }			
 		});
 		btnValidate.setBounds(286, 273, 120, 40);
