@@ -40,6 +40,9 @@ public class DAOFactory {
 	}
 	
 	// Commande
+	public DAO<Order> getOrderDAO(){
+		return new DAOOrder(conn);
+	}
 	
 	// Spectacle
 	public DAO<Show> getShowDAO(){
