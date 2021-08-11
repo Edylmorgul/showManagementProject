@@ -112,9 +112,9 @@ public class Order implements Serializable{
 	}
 	
 	// Calcul total commande + frais 5 euros + mode paiement sepa 10 euros
-	public double calculateTotalOrder(List<Ticket> ticketList, String deliveryMethod) {
+	public double calculateTotalOrder(String deliveryMethod) {
 		double total = 0;
-		for(Ticket ticket : ticketList)
+		for(Ticket ticket : this.ticketList)
 			total += ticket.getPrice();
 		
 		// 10 SEPA + 5 frais de dossier

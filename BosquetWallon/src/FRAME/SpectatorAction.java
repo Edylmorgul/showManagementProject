@@ -138,7 +138,10 @@ public class SpectatorAction extends JFrame {
 		JButton btnDisplayReservation = new JButton("Commandes");
 		btnDisplayReservation.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
+				SpectatorDisplayOrder frame = new SpectatorDisplayOrder(cli);				
+			    frame.setLocationRelativeTo(null);
+			    frame.setVisible(true);  
+			    dispose();
 			}
 		});
 		btnDisplayReservation.setBounds(230, 190, 120, 40);

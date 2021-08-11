@@ -17,7 +17,6 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
-import java.util.List;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 
@@ -40,7 +39,7 @@ public class SpectatorSummaryOrder extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public SpectatorSummaryOrder(Spectator cli, Order commande, Show show, JSpinner[] tabSpinner, List<Ticket> listPlace) {
+	public SpectatorSummaryOrder(Spectator cli, Order order, Show show, JSpinner[] tabSpinner) {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 650, 450);
 		contentPane = new JPanel();
@@ -81,30 +80,30 @@ public class SpectatorSummaryOrder extends JFrame {
 		lblCoutTotal.setBounds(470, 200, 150, 20);
 		contentPane.add(lblCoutTotal);
 		
-		initFrame(commande);
+		initFrame(order);
 		
 		// Afficher place + prix
-		displayPlaceFrame(listPlace);
+		displayPlaceFrame(order);
 		
 		// Validation reservation place
-		btnConfirmFrame(commande, listPlace);
+		btnConfirmFrame(order);
 		
 		// Annulation reservation place
 		btnCancelOrder(cli, show, tabSpinner);
 	}
 	
-	private void initFrame(Order commande) {
-		lblPaiment.setText(commande.getPaymentMethod());
-		lblLivraison.setText(commande.getDeliveryMethod());
-		lblCoutTotal.setText(commande.getTotal()+"");
+	private void initFrame(Order order) {
+		lblPaiment.setText(order.getPaymentMethod());
+		lblLivraison.setText(order.getDeliveryMethod());
+		lblCoutTotal.setText(order.getTotal()+"");
 	}
 	
-	private void displayPlaceFrame(List<Ticket> listPlace) {
+	private void displayPlaceFrame(Order order) {
 		int y = 80;
-		int taille = listPlace.size();
+		int taille = order.getTicketList().size();
 		tabLabel = new JLabel[taille];
 		for(int i = 0 ; i< taille; i++ ) {
-			tabLabel[i] = new JLabel("Ticket n° " + (i+1) + " - " + listPlace.get(i).toString());
+			tabLabel[i] = new JLabel("Ticket n° " + (i+1) + " - " + order.getTicketList().get(i).toString());
 			tabLabel[i].setHorizontalAlignment(SwingConstants.LEFT);
 			tabLabel[i].setBounds(20, y, 350, 20);
 			contentPane.add(tabLabel[i]);
@@ -112,27 +111,27 @@ public class SpectatorSummaryOrder extends JFrame {
 		}			
 	}
 	
-	private void btnConfirmFrame(Order commande, List<Ticket> listPlace) {
+	private void btnConfirmFrame(Order order) {
 		JButton btnNewButton = new JButton("Confirmer");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				boolean error = false;
 				// Création de la commande
-				if(commande.create()) {
+				if(order.create()) {
 					// Création des places
-					for(Ticket place : listPlace) {
+					for(Ticket place : order.getTicketList()) {
 						if(!place.create())
 							error = true;
 					}
 										
 					if(error) {
 						JOptionPane.showMessageDialog(null, "Une erreur est survenue lors de la reservation de vos places !");
-						commande.delete();
+						order.delete();
 					}
 					
 					else {
 						JOptionPane.showMessageDialog(null, "Reservation validée !");
-						SpectatorAction frame = new SpectatorAction(commande.getSpectator());
+						SpectatorAction frame = new SpectatorAction(order.getSpectator());
 		                frame.setLocationRelativeTo(null);
 		                frame.setVisible(true);
 		                dispose();
